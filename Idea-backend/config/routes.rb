@@ -2,14 +2,16 @@ Rails.application.routes.draw do
   Rails.application.routes.draw do
     namespace :api do
       namespace :v1 do
-        resources :users
         resources :companies
         resources :offers
         resources :ideas
+        resources :users
+        post 'login', :to => 'login#login'
       end
     end
   end
 end
+
 
 # Rails.application.routes.draw do
 #   namespace :api do
