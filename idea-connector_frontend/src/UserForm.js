@@ -6,11 +6,49 @@ import 'semantic-ui-css/semantic.min.css';
 
 class UserForm extends Component {
 
+  // state = {
+  //   }
+  //
+  //   handleChange = (e) => {
+  //       this.setState({
+  //          [e.target.name]: e.target.value
+  //       })
+  //   }
+  //
+  //   handleSubmit = (e, title, image, video, song, description, id) => {
+  //     e.preventDefault();
+  //     fetch(`http://localhost:3000/api/v1/ideas/${id}`, {
+  //       method: "PATCH",
+  //       headers: {
+  //          "Content-Type": "application/json",
+  //           "Accept": "application/json"
+  //       },
+  //       body: JSON.stringify({
+  //           title: title,
+  //           image: image,
+  //           video: video,
+  //           song: song,
+  //           description: description
+  //       })
+  //     })
+  //       .then(response => response.json())
+  //       .then(editIdea => {
+  //             this.props.newNote(id, title, image, video, song, description)
+  //     })
+  //     this.setState({
+  //       title: '',
+  //       image: '',
+  //       video: '',
+  //       song: '',
+  //       description: ''
+  //     })
+  //
+  //   }
 
 
   render() {
     return (
-    <form>
+    <form onSubmit>
       <div className="ui form">
         <div className="field">
           <label>First Name</label>
@@ -47,13 +85,13 @@ class UserForm extends Component {
         </div>
       </div>
           <button class="ui button" type="submit">Submit</button>
+          <button onClick={this.props.handleFormBack} class='ui button'>Changed My Mind</button>
   </div>
 </form>
 
     );
   }
 }
-
 
 
 

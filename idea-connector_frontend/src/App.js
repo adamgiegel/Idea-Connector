@@ -19,8 +19,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Navbar currentUser={this.state.currentUser} handleLogout={this.handleLogout} clicked={this.state.clicked} handleClick={this.handleClick}/>
-      <HomePage currentUser={this.state.currentUser}/>
+        <HomePage />
       </div>
     );
   }

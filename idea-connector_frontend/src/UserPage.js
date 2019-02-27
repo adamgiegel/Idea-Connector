@@ -10,17 +10,19 @@ class UserPage extends Component {
 
 state = {
   clicked: true,
-  findIdea: ''
+  findIdea: '',
+  selected: true,
+  chosen: true
 }
 
 
 handleClick = (id) => {
-  const findIdea = this.props.currentUser.ideas.find(idea =>{
+  const findIdea = this.props.currentUser.ideas.find(idea => {
     return idea.id === id
   })
   this.setState({
     findIdea: findIdea,
-    clicked: !this.state.clicked
+    clicked: !this.state.clicked,
   })
 }
 
@@ -30,36 +32,72 @@ goBack = () => {
   })
 }
 
+handleFormBack = () => {
+  this.setState({
+    chosen: !this.state.chosen
+  })
+}
+
+handleNewFormClick = () => {
+  this.setState({
+    chosen: !this.state.chosen
+  })
+}
+
+handleSelectedClick = () => {
+  this.setState({
+    selected: !this.state.selected
+  })
+}
+
+handleYourIdeaBack = () => {
+  this.setState({
+    selected: !this.state.selected
+  })
+}
+
+
 
   render() {
     return (
-      <div className="App">
       <div>
-      {
-        this.state.clicked ?
-        this.props.currentUser.ideas.map(idea => {
-          return (
-            <p onClick={() => this.handleClick(idea.id)}>{idea.title}</p>
-          )}) :
-              <div>
-              <iframe src={this.state.findIdea.video}/>
-              <p>{this.state.findIdea.description}</p>
-              <button onClick={this.goBack}>GO BACK</button>
-              </div>
-      }
-      </div>
       <div>
-      <Card
+      {this.state.chosen ?
+      <div>
+      <Card onClick={this.handleNewFormClick}
       image='https://media.giphy.com/media/tJdCvTmdJdhQSf4tGj/giphy.gif'
-      description="HAVE AND IDEA?"
+      description="HAVE AN IDEA?"
       />
       </div>
+      : <UserForm handleFormBack={this.handleFormBack} />}
+      </div>
       <div>
-      <Card
+      {this.state.selected ?
+      <div>
+      <Card className="needIdea" onClick={this.handleSelectedClick}
       image="https://media.giphy.com/media/xTkcEEFmqMosEnKtzi/giphy.gif"
       description="GO TO MY IDEAS."
       />
       </div>
+    :
+    this.props.currentUser.ideas.map(idea => {
+      if(this.state.clicked){
+      return <p onClick={() => this.handleClick(idea.id)}>{idea.title}</p>
+    }
+  })
+}
+    {!this.state.clicked ?
+            <div>
+            <iframe src={this.state.findIdea.video}/>
+            <p>{this.state.findIdea.description}</p>
+            <button onClick={this.goBack}>GO BACK</button>
+            </div> : null}
+    <div>
+    {!this.state.selected ?
+    <button class='ui button' onClick={this.handleYourIdeaBack}>I'M DONE, THANKS</button> : null
+  }
+    </div>
+    </div>
     </div>
     );
   }

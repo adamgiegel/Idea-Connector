@@ -102,13 +102,20 @@
 .ui.card { float: left; }
 
 .ui.form {
-  width: 500px;
-  margin-left: 450px;
+  position: absolute;
+  top: 10%;
+  left: 10%;
+}
+
+.carousel {
+  background-color: white;
 }
 
 .logos {
-  position: static;
-  border: 3px solid #73AD21;
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  border: 3px solid #8AC007;
 }
 
 .menu-item {
@@ -128,4 +135,16 @@
 .scroll-menu-arrow {
   padding: 20px;
   cursor: pointer;
+}
+
+.haveIdea {
+  position: absolute; /* or absolute */
+  top: 50%;
+  left: 15%;
+}
+
+.ui.equal.width.grid {
+  position: fixed;
+  top: 50%;
+  left: 30%;
 }

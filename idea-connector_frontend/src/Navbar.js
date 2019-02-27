@@ -8,8 +8,6 @@ class Navbar extends Component {
       <div className="topnav">
         <a className="active" href="#home">Home</a>
         <a href="#news">Hello, {this.props.currentUser.name}!</a>
-        <a href="#contact">Contact</a>
-        <a href="#about">About</a>
         <div onClick={this.props.handleClick}>
         {this.props.clicked ? <a href='#login'>Login</a> : <a href='#login'>Logout</a>}
         </div>
