@@ -1,109 +1,61 @@
 import React, { Component } from 'react';
 import './App.css';
-import 'semantic-ui-css/semantic.min.css';
-import { Card, Icon } from 'semantic-ui-react'
+// import 'semantic-ui-css/semantic.min.css';
+// import { Card, Icon } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css';
 import UserForm from './UserForm'
+import SeeIdeas from './SeeIdeas';
+import NewIdea from './NewIdea';
 import IdeaDisplay from './IdeaDisplay'
+import 'materialize-css';
+import 'materialize-css/dist/css/materialize.min.css';
+import { Card, Button, Row, Col } from 'react-materialize'
 
 class UserPage extends Component {
 
-state = {
-  clicked: true,
-  findIdea: '',
-  selected: true,
-  chosen: true
-}
+  state = {
+    clicked: true,
+    backgroundImage: 'url("https://optinmonster.com/wp-content/uploads/2017/02/Blog-Post-Ideas-1.png")'
+  }
 
-
-handleClick = (id) => {
-  const findIdea = this.props.currentUser.ideas.find(idea => {
-    return idea.id === id
-  })
-  this.setState({
-    findIdea: findIdea,
-    clicked: !this.state.clicked,
-  })
-}
-
-goBack = () => {
+handleClick = () => {
   this.setState({
     clicked: !this.state.clicked
   })
 }
 
-handleFormBack = () => {
-  this.setState({
-    chosen: !this.state.chosen
-  })
-}
-
-handleNewFormClick = () => {
-  this.setState({
-    chosen: !this.state.chosen
-  })
-}
-
-handleSelectedClick = () => {
-  this.setState({
-    selected: !this.state.selected
-  })
-}
-
-handleYourIdeaBack = () => {
-  this.setState({
-    selected: !this.state.selected
-  })
-}
-
-
-
   render() {
+    console.log('user', this.props.currentUser)
     return (
       <div>
+      <Card className="yourIdeaCard">
       <div>
-      {this.state.chosen ?
-      <div>
-      <Card onClick={this.handleNewFormClick}
-      image='https://media.giphy.com/media/tJdCvTmdJdhQSf4tGj/giphy.gif'
-      description="HAVE AN IDEA?"
-      />
+      <h1 className="yourIdea">YOUR IDEA CONNECTION</h1>
       </div>
-      : <UserForm handleFormBack={this.handleFormBack} />}
+      </Card>
+      <div>
+      <div>
+      <SeeIdeas
+      deleteIdeaBack={this.props.deleteIdeaBack}
+      clicked2={this.props.clicked2}
+      currentUser={this.props.currentUser}
+      handleClicked={this.props.handleClicked}
+      foundIdea={this.props.foundIdea}
+      addNewIdea={this.props.addNewIdea}
+      deleteIdea={this.props.deleteIdea}
+      ideas={this.props.ideas}/>
       </div>
       <div>
-      {this.state.selected ?
-      <div>
-      <Card className="needIdea" onClick={this.handleSelectedClick}
-      image="https://media.giphy.com/media/xTkcEEFmqMosEnKtzi/giphy.gif"
-      description="GO TO MY IDEAS."
-      />
+      <NewIdea
+      currentUser={this.props.currentUser}
+      foundIdea={this.props.foundIdea}
+      addNewIdea={this.props.addNewIdea}
+      deleteIdea={this.props.deleteIdea}/>
       </div>
-    :
-    this.props.currentUser.ideas.map(idea => {
-      if(this.state.clicked){
-      return <p onClick={() => this.handleClick(idea.id)}>{idea.title}</p>
-    }
-  })
-}
-    {!this.state.clicked ?
-            <div>
-            <iframe src={this.state.findIdea.video}/>
-            <p>{this.state.findIdea.description}</p>
-            <button onClick={this.goBack}>GO BACK</button>
-            </div> : null}
-    <div>
-    {!this.state.selected ?
-    <button class='ui button' onClick={this.handleYourIdeaBack}>I'M DONE, THANKS</button> : null
-  }
-    </div>
-    </div>
-    </div>
+      </div>
+      </div>
     );
   }
 }
-
-
-
 
 export default UserPage;

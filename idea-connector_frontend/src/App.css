@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css?family=Anton');
+@import url('https://fonts.googleapis.com/css?family=Karla');
+@import url('https://fonts.googleapis.com/css?family=Courgette');
+
 .App {
   text-align: center;
 }
@@ -137,14 +141,131 @@
   cursor: pointer;
 }
 
-.haveIdea {
-  position: absolute; /* or absolute */
+.idea1 {
   top: 50%;
+  right: 35%
+}
+
+.idea2 {
+  top: 50%;
+  left: 60%;
+}
+
+
+.carousel {
+  left: 18%;
+}
+
+.myIdeasCard {
   left: 15%;
 }
 
-.ui.equal.width.grid {
-  position: fixed;
+.myIdeasCard2 {
+  left: 15%;
+}
+
+.carouselCard {
+  background-color: blue;
+}
+
+
+.userForm {
+  color: green;
+  position: absolute; /* or absolute */
+  top: 100%;
+  left: 61%;
+}
+
+.ideaConnector {
+  font-size: 10em;
+  font-family: 'Anton';
+  color: #D2691E;
+}
+
+.cardColor {
+  background-color: red;
+}
+
+.about{
+  font-size: 6em;
+  font-family: 'Anton';
+  color: #D2691E;
+}
+
+.yourIdea{
+  font-size: 6em;
+  font-family: 'Anton';
+  color: #D2691E;
+}
+
+.aboutWords{
+  font-size: 15px;
+  font-family: 'Karla';
+  color: black;
+}
+
+.likedIdeas {
   top: 50%;
-  left: 30%;
+  left: 50%;
+}
+
+.ideaList {
+  left: 50%;
+  color: blue;
+}
+
+.ideasList {
+  font-size: 2em;
+  font-family: 'Anton';
+  color: white;
+  left: 80%
+}
+
+.yourIdeas {
+  color: white;
+}
+
+.yourIdeaCard {
+  left: 15%;
+}
+
+.likedIdeasText {
+  font-size: 2em;
+  font-family: 'Anton';
+  color: #D2691E;
+}
+
+.description {
+  font-family: 'Anton';
+  color: #D2691E;
+}
+
+.likeName {
+  font-family: 'Courgette'
+}
+
+.searchedIdeas {
+  left: 90%;
+}
+
+.needIdea {
+  left: 42%;
+}
+
+.ideaCard {
+  font-size: 2em;
+  font-family: 'Anton';
+  color: #D2691E;
+}
+
+.companyInfo {
+  font-size: 2em;
+  font-family: 'Anton';
+  color: #4682B4;
+}
+
+.companyInfo1 {
+  font-size: 1em;
+  font-family: 'Anton';
+  color: #4682B4;
 }

@@ -6,77 +6,86 @@ import 'semantic-ui-css/semantic.min.css';
 
 class UserForm extends Component {
 
-  // state = {
-  //   }
-  //
-  //   handleChange = (e) => {
-  //       this.setState({
-  //          [e.target.name]: e.target.value
-  //       })
-  //   }
-  //
-  //   handleSubmit = (e, title, image, video, song, description, id) => {
-  //     e.preventDefault();
-  //     fetch(`http://localhost:3000/api/v1/ideas/${id}`, {
-  //       method: "PATCH",
-  //       headers: {
-  //          "Content-Type": "application/json",
-  //           "Accept": "application/json"
-  //       },
-  //       body: JSON.stringify({
-  //           title: title,
-  //           image: image,
-  //           video: video,
-  //           song: song,
-  //           description: description
-  //       })
-  //     })
-  //       .then(response => response.json())
-  //       .then(editIdea => {
-  //             this.props.newNote(id, title, image, video, song, description)
-  //     })
-  //     this.setState({
-  //       title: '',
-  //       image: '',
-  //       video: '',
-  //       song: '',
-  //       description: ''
-  //     })
-  //
-  //   }
+  state = {
+    title: '',
+    image: '',
+    video: '',
+    song: '',
+    description: '',
+    userId: this.props.currentUser.id
+  }
+
+handleSubmit = (e) => {
+  e.preventDefault()
+  const title = this.state.title
+  const image = this.state.image
+  const video = this.state.video
+  const song = this.state.song
+  const description = this.state.description
+  const userId = this.props.currentUser.id
+  // this.props.addNewIdea(idea)
+  console.log("trying to send new idea")
+  fetch('http://localhost:3000/api/v1/ideas' ,{
+    method: 'POST',
+           headers: {
+                     'Content-Type': 'application/json',
+                     'Accept': 'application/json'},
+           body: JSON.stringify({
+               title: title,
+               image: image,
+               video: video,
+               song: song,
+               description: description,
+               user_id: userId,
+               offer_id: 2
+           })
+  }).then(res=> res.json())
+  .then(idea => {
+    console.log("added idea");
+    this.props.addNewIdea(idea)
+    this.setState({
+    title: '',
+    image: '',
+    video: '',
+    song: '',
+    description: ''
+  }, this.props.handleFormBack)})
+
+
+}
+
+handleChangeForm = (e) => {
+  console.log(e.target.value)
+  this.setState({
+    [e.target.name]: e.target.value
+  })
+}
+
 
 
   render() {
     return (
-    <form onSubmit>
+    <form onSubmit={(e) => this.handleSubmit(e)}>
       <div className="ui form">
-        <div className="field">
-          <label>First Name</label>
-          <input type="text" name="first-name" placeholder="First Name"/>
-        </div>
-        <div className="field">
-          <label>Last Name</label>
-          <input type="text" name="last-name" placeholder="Last Name"/>
-        </div>
         <div class="field">
           <label>Idea Name</label>
-          <input type="text" name="idea-name" placeholder="Idea Name"/>
+          <input onChange={this.handleChangeForm} type="text" name="title" placeholder="Idea Name" value={this.state.title}/>
         </div>
         <div class="field">
           <label>Video Link</label>
-          <input type="text" name="video-link" placeholder="Video Link"/>
+          <input onChange={this.handleChangeForm} type="text" name="video" placeholder="Video Link" value={this.state.video}/>
         </div>
         <div class="field">
           <label>Song Link</label>
-          <input type="text" name="song-link" placeholder="Song Link"/>
+          <input onChange={this.handleChangeForm} type="text" name="song" placeholder="Song Link" value={this.state.song}/>
         </div>
         <div class="field">
           <label>Image Link</label>
-          <input type="text" name="image-link" placeholder="Image Link"/>
+          <input onChange={this.handleChangeForm} type="text" name="image" placeholder="Image Link" value={this.state.image}/>
         </div>
         <div class="field">
             <label>Description</label>
-            <textarea></textarea>
+            <textarea onChange={this.handleChangeForm} type="text" name="description" value={this.state.description}></textarea>
         </div>
         <div class="field">
         <div class="ui checkbox">
