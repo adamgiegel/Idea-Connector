@@ -7,6 +7,8 @@ Rails.application.routes.draw do
         resources :ideas
         resources :users
         post 'login', :to => 'login#login'
+        post 'users/login', :to => 'login#user_login'
+        post 'likes', :to => 'likes#create'
       end
     end
   end

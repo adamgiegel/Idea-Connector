@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_20_214428) do
+ActiveRecord::Schema.define(version: 2019_03_04_203827) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "companies", force: :cascade do |t|
     t.string "name"
-    t.text "description"
+    t.text "about"
     t.string "email"
     t.string "contact"
     t.string "username"
@@ -32,8 +32,16 @@ ActiveRecord::Schema.define(version: 2019_02_20_214428) do
     t.string "video"
     t.string "song"
     t.string "description"
+    t.string "category"
     t.integer "user_id"
     t.integer "offer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.integer "idea_id"
+    t.integer "company_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

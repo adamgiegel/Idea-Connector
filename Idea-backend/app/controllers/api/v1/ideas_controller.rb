@@ -1,5 +1,5 @@
 class Api::V1::IdeasController < ApplicationController
-  before_action :find_idea, only: [:update, :destroy]
+  before_action :find_idea, only: [:update, :likes, :destroy]
 
   def index
     @ideas = Idea.all
@@ -11,36 +11,36 @@ class Api::V1::IdeasController < ApplicationController
     render json: @idea, status: :ok
   end
 
-  # def create#where the post request goes
-  #   @idea = Idea.create(idea_params)
-  #   if @idea.valid?
-  #     redirect_to @idea
-  #   else flash[:errors] = @idea.errors.full_messages
-  #     redirect_to new_idea_path
-  #   end
-  # end
-  #
-  # def update
-  #   @idea.update(idea_params)
-  #   if @idea.save
-  #     render json: @idea, status: :accepted
-  #   else
-  #     render json: { errors: @idea.errors.full_messages }, status: :unprocessible_entity
-  #   end
-  # end
-  #
-  # def destroy
-  #   @idea.destroy
-  #   redirect_to ideas_path
-  # end
+  def create#where the post request goes
+    @idea = Idea.create(idea_params)
+    # @idea.save
+    render json: @idea, status: :accepted
+  end
+
+
+  def update
+    @idea.update(idea_params)
+    if @idea.save
+      render json: @idea, status: :accepted
+    else
+      render json: { errors: @idea.errors.full_messages }, status: :unprocessible_entity
+    end
+  end
+
+
+  def destroy
+    ideaId = @idea.id
+    @idea.destroy
+    render json: {message:"Zap! user deleted", ideaId:ideaId}
+  end
 
   private
 
   def idea_params
-    params.require(:idea).permit(:title, :image, :video, :song, :description)
+    params.require(:idea).permit(:title, :image, :video, :song, :description, :category, :user_id, :offer_id)
   end
 
-  def find_movie
-    @idea = idea.find(params[:id])
+  def find_idea
+    @idea = Idea.find(params[:id])
   end
 end

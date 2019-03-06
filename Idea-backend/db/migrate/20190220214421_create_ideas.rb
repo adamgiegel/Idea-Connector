@@ -6,6 +6,8 @@ class CreateIdeas < ActiveRecord::Migration[5.2]
       t.string :video
       t.string :song
       t.string :description
+      t.string :category
+      t.integer :likes
       t.integer :user_id
       t.integer :offer_id
 
