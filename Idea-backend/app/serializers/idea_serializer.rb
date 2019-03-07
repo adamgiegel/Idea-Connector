@@ -2,7 +2,7 @@ class IdeaSerializer < ActiveModel::Serializer
   belongs_to :user
   has_many :offers
   has_many :companies, through: :offers
-  attributes :id, :title, :image, :video, :song, :description, :category, :num_likes, :likers
+  attributes :id, :title, :image, :video, :song, :description, :category, :num_likes, :likers, :user
 
   def likers
     self.object.likes.map do |like|
