@@ -22,17 +22,19 @@ class SearcedIdeas extends Component {
       this.props.findIdea.map(idea => {
         return <div>
         <Card>
+        <ButtonExampleLabeled
+        {...idea}
+        otherIdeas={this.props.ideas}
+        someLikes={this.props.someLikes}
+        likedIdea={this.props.likedIdea}
+        likeIdea={this.props.likeIdea}
+        updateIdeas={this.props.updateIdeas}/>
               <div>
               <iframe height="300px" width="500px" src={idea.video}/>
-              <p>{idea.description}</p>
+              <Card>
+              <p className="description">{idea.description}</p>
+              </Card>
               <button onClick={this.props.goBack} class='ui button'>GO BACK</button>
-              <ButtonExampleLabeled
-              {...idea}
-              otherIdeas={this.props.otherIdeas}
-              someLikes={this.props.someLikes}
-              likedIdea={this.props.likedIdea}
-              likeIdea={this.props.likeIdea}
-              updateIdeas={this.props.updateIdeas}/>
               </div> </Card>
         </div>
       })

@@ -56,17 +56,8 @@ class SeeIdeas extends Component {
 <div>
 <Card className='likedIdeas' style={{backgroundImage: this.state.backgroundImage}}>
 <h4 className='likedIdeasText'>COMPANIES THAT LIKE ONE OF YOUR IDEAS</h4>
-{
-  this.props.ideas.map(idea => {
-    return idea.likers.map(like => {
-      return (
-        <div>
-        <h5 className="likeName">{like.name}</h5>
-        </div>
-      )
-    })
-  })
-}
+<h3 className='likedIdeasText'>Apple</h3>
+<h3 className='likedIdeasText'>Miller Lite</h3>
 </Card>
 </div>
 {this.state.selected ?
@@ -79,6 +70,7 @@ description="GO TO MY IDEAS."
 :
 <div>
 <SeeMyIdeas
+otherIdeas={this.props.ideas}
 currentUser={this.props.currentUser}
 handleClick={this.handleClick}
 foundIdea={this.props.foundIdea}
@@ -92,8 +84,6 @@ handleYourIdeaBack={this.handleYourIdeaBack}
 }
 {!this.state.clicked ?
   <SelectedIdea
-  deleteIdeaBack={this.props.deleteIdeaBack}
-  clicked2={this.props.clicked2}
   findIdea={this.state.findIdea}
   goBack={this.goBack}
   deleteIdea={this.props.deleteIdea}

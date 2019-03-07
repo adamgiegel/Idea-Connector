@@ -17,7 +17,21 @@ class CompanyPage extends Component {
 
   state = {
     needIdeaClick: true,
-    aboutClick: true
+    aboutClick: true,
+    search: ''
+  }
+
+  handleChangeSearch = (e) => {
+    this.setState({
+      search: e.target.value
+    })
+  }
+
+  filterCategories = () => {
+    return this.props.ideas.filter(idea => {
+      console.log(idea.category)
+      return idea.category.toLowerCase().includes(this.state.search.toLowerCase())
+    })
   }
 
 handleNeedIdea = () => {
@@ -37,11 +51,11 @@ handleAboutClick = () => {
     return (
       <div>
       {this.state.aboutClick ?
-      <div>
-      <p className="companyInfo">{this.props.currentUser.name}</p>
-      <p className="companyInfo1">{this.props.currentUser.about}</p>
-      <button class='ui button' onClick={this.handleAboutClick}>EDIT YOUR INFO</button>
-      </div>
+        <div>
+          <p className="companyInfo">{this.props.currentUser.name}</p>
+          <p className="companyInfo1">{this.props.currentUser.about}</p>
+          <button class='ui button' onClick={this.handleAboutClick}>EDIT YOUR INFO</button>
+          </div>
       :
       <div>
       <EditCompanyForm
@@ -67,25 +81,28 @@ handleAboutClick = () => {
       </div>
       :
       <div className="searchedIdeas">
-      <SearchForm onClick={this.ideaDetails}
+      <SearchForm
+
+      onClick={this.ideaDetails}
       needIdeaClick={this.state.needIdeaClick}
       handleNeedIdea={this.handleNeedIdea}
       handleChangeDetails={this.props.handleChangeDetails}
-      handleChangeSearch={this.props.handleChangeSearch}
-      search={this.props.search}/>
+      handleChangeSearch={this.handleChangeSearch}
+      search={this.state.search}/>
       <div>
 
       {this.props.ideaClick ?
         <SearchedIdeas
+        ideas={this.props.ideas}
         ideaClick={this.props.ideaClick}
         goBack={this.props.goBack}
         findIdea={this.props.findIdea}
-        otherIdeas={this.props.ideas}
         someLikes={this.props.likes}
         likedIdea={this.props.likedIdea}
         likeIdea={this.props.likeIdea}
         updateIdeas={this.props.updateIdeas}/> :
         <IdeaList
+        otherIdeas={this.filterCategories()}
         ideas={this.props.ideas}
         foundIdea={this.props.foundIdea}
         />}

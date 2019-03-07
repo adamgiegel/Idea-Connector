@@ -40,6 +40,7 @@ handleSubmit = (e, name, about, email, contact, id) => {
 }
 
 
+
 handleChangeForm = (e) => {
   console.log(e.target.value)
   this.setState({
@@ -70,7 +71,7 @@ handleChangeForm = (e) => {
           <input onChange={this.handleChangeForm} type="text" name="contact" placeholder="Contact" value={this.state.contact}/>
         </div>
           <button class="ui button" type="submit">Submit</button>
-          <button onClick={this.props.handleAboutClick} class='ui button'>Changed My Mind</button>
+          <button onClick={this.props.handleAboutClick} class='ui button'>GO BACK</button>
   </div>
 </form>
 

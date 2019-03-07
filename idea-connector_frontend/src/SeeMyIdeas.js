@@ -14,6 +14,7 @@ class SeeMyIdeas extends Component{
   }
 
   render(){
+    console.log("otherIdeas", this.props.otherIdeas)
     return(
       <Card className="myIdeasCard">
       <div style={{backgroundImage: this.state.backgroundImage}} class="row">

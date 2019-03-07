@@ -47,7 +47,6 @@ state = {
     foundIdea: '',
     loggedIn: false,
     currentUser: '',
-    search: '',
     value: '',
     ideaClick: '',
     likedIdea: '',
@@ -166,7 +165,9 @@ fetch(`http://localhost:3000/api/v1/likes`, {
 })
 .then(res => res.json())
 .then(like => {
-  console.log("booyah", like)
+  this.setState({
+    likedIdea: like
+  })
 })
 }
 
@@ -190,20 +191,11 @@ deleteIdeaBack = () => {
 
 
 addNewIdea = (idea) => {
-  const newIdea = {
-    title: idea.title,
-    image: idea.image,
-    video: idea.video,
-    song: idea.song,
-    description: idea.description,
-    user_id: idea.user_id,
-    offer_id: idea.offer_id
-  }
   // console.log("old state", this.state.currentUser.ideas, this.state.ideas)
   this.setState(prevState => {
     return {
-      ideas: [...prevState.ideas, newIdea],
-      currentUser: {...prevState.currentUser, ideas: [...prevState.currentUser.ideas, newIdea]}
+      ideas: [...prevState.ideas, idea],
+      currentUser: {...prevState.currentUser, ideas: [...prevState.currentUser.ideas, idea]}
     }
   }, () => console.log("updated state", this.state.currentUser.ideas, this.state.ideas))
 }
@@ -231,7 +223,7 @@ newCompany = (id, name, about, email, contact) => {
     companyCopy[companyIdx] = company
     this.setState({
       companies: companyCopy,
-    })
+    }, () => console.log("after", this.state.companies))
 }
 
 
@@ -285,12 +277,6 @@ foundIdea = (id) => {
 }
 
 
-handleChangeSearch = (e) => {
-  this.setState({
-    search: e.target.value
-  })
-}
-
 handleClickedIdea = (id) => {
   const foundIdea = this.state.users.map(user => {
     return user.ideas.find(idea => {
@@ -305,10 +291,7 @@ handleClickedIdea = (id) => {
     clickedIdea: !this.state.clickedIdea,
   })
 }
-filterCategories = () => {
-  return this.state.ideas.filter(idea => idea.category.toLowerCase().includes(this.state.search.toLowerCase()))
 
-}
 
 
 
@@ -323,8 +306,7 @@ dashBoardComponents() {
       {
         this.state.value === "company" ?
       <CompanyPage
-        ideas={this.filterCategories()}
-        otherIdeas={this.state.ideas}
+        ideas={this.state.ideas}
         clickedIdea={this.state.clickedIdea}
         clickedIdeaBack={this.clickedIdeaBack}
         handleClickedIdea={this.handleClickedIdea}
@@ -370,7 +352,7 @@ if (this.state.loggedIn === true){
 }
 
 render() {
-console.log("crap", this.state.companies)
+console.log("crap", this.state.ideas)
   return (
     <Router>
       <div className="App">

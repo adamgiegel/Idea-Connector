@@ -8,7 +8,8 @@ class ButtonExampleLabeled extends Component{
     const thisLikes = this.props.otherIdeas.find(idea => {
       return idea.id === this.props.id
     })
-    console.log(thisLikes)
+    console.log("poopy", thisLikes)
+    console.log(this.props.likedIdea)
     return (
       <div>
               <Button onClick={() => this.props.updateIdeas(this.props.id)} as='div' labelPosition='right'>
@@ -17,7 +18,7 @@ class ButtonExampleLabeled extends Component{
                   Like
                 </Button>
                 <Label s='a' basic pointing='left'>
-                  {thisLikes.num_likes}
+                  {this.props.likedIdea.num_likes}
                 </Label>
               </Button>
             </div>

@@ -21,7 +21,7 @@ class IdeaList extends Component {
     return (
       <div>
       {
-        this.props.ideas.map(idea => {
+        this.props.otherIdeas.map(idea => {
           if(!this.props.ideaClick)
           return <div class="card-panel hoverable" onClick={() => this.props.foundIdea(idea.id)}><p className="ideaCard">{idea.title}</p></div>
       })

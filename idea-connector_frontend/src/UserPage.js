@@ -29,7 +29,7 @@ handleClick = () => {
     return (
       <div>
       <Card className="yourIdeaCard">
-      <div>
+      <div class="card-panel hoverable">
       <h1 className="yourIdea">YOUR IDEA CONNECTION</h1>
       </div>
       </Card>

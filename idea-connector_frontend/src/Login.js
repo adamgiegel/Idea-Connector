@@ -17,7 +17,7 @@ class Login extends Component {
     backgroundImage: 'url("https://optinmonster.com/wp-content/uploads/2017/02/Blog-Post-Ideas-1.png")',
     value: '',
     clicked: true,
-    about: true
+    shadup: true
   }
 
   fetchSignUp = (e) => {
@@ -158,7 +158,7 @@ handleSignUpDropdown=(event)=> {
 
   aboutClick = () => {
     this.setState({
-      about: !this.state.about
+      shadup: !this.state.shadup
     })
   }
 
@@ -214,7 +214,7 @@ handleSignUpDropdown=(event)=> {
         </Col>
         <Col s={3} m={4}>
           {
-          !this.state.about ?
+          !this.state.shadup ?
           <div>
           <a onClick={this.aboutClick} class="btn-floating btn-large waves-effect waves-light blue"><i class="material-icons">arrow_back</i></a>
           {this.state.showSignUp === false ? this.loginForm() : this.signUpForm()}

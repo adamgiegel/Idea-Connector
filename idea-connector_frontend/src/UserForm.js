@@ -12,6 +12,7 @@ class UserForm extends Component {
     video: '',
     song: '',
     description: '',
+    category: '',
     userId: this.props.currentUser.id
   }
 
@@ -22,6 +23,7 @@ handleSubmit = (e) => {
   const video = this.state.video
   const song = this.state.song
   const description = this.state.description
+  const category = this.state.category
   const userId = this.props.currentUser.id
   // this.props.addNewIdea(idea)
   console.log("trying to send new idea")
@@ -36,6 +38,7 @@ handleSubmit = (e) => {
                video: video,
                song: song,
                description: description,
+               category: category,
                user_id: userId,
                offer_id: 2
            })
@@ -48,14 +51,14 @@ handleSubmit = (e) => {
     image: '',
     video: '',
     song: '',
-    description: ''
+    description: '',
+    category: '',
   }, this.props.handleFormBack)})
 
 
 }
 
 handleChangeForm = (e) => {
-  console.log(e.target.value)
   this.setState({
     [e.target.name]: e.target.value
   })
@@ -86,6 +89,10 @@ handleChangeForm = (e) => {
         <div class="field">
             <label>Description</label>
             <textarea onChange={this.handleChangeForm} type="text" name="description" value={this.state.description}></textarea>
+        </div>
+        <div class="field">
+            <label>Category</label>
+            <textarea onChange={this.handleChangeForm} type="text" name="category" value={this.state.category}></textarea>
         </div>
         <div class="field">
         <div class="ui checkbox">
