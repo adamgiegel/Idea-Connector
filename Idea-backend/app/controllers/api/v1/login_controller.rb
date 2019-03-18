@@ -1,9 +1,9 @@
 class Api::V1::LoginController < ApplicationController
   def user_login
     @users = User.all
-    @user = @users.find_by(username: params[:username])
+    @user = @users.find_by(username: params[:username], password: params[:password])
     if @user.nil? #is the entered username in the db?
-      render json: {error: "Username not found"}
+      render json: {error: "Username or Password not found"}
     else
     render json: @user, status: :ok
   end
