@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
 import 'semantic-ui-css/semantic.min.css';
-import { Card, Icon } from 'semantic-ui-react'
-import 'semantic-ui-css/semantic.min.css';
 
 class UserForm extends Component {
 
@@ -25,8 +23,6 @@ handleSubmit = (e) => {
   const description = this.state.description
   const category = this.state.category
   const userId = this.props.currentUser.id
-  // this.props.addNewIdea(idea)
-  console.log("trying to send new idea")
   fetch('http://localhost:3000/api/v1/ideas' ,{
     method: 'POST',
            headers: {
@@ -44,7 +40,6 @@ handleSubmit = (e) => {
            })
   }).then(res=> res.json())
   .then(idea => {
-    console.log("added idea");
     this.props.addNewIdea(idea)
     this.setState({
     title: '',

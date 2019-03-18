@@ -4,7 +4,6 @@ import 'materialize-css/dist/css/materialize.min.css';
 import { Card, Button, Row, Col } from 'react-materialize'
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
-// import BackgroundImage from 'https://media.giphy.com/media/bcKmIWkUMCjVm/giphy.gif'
 
 class Login extends Component {
   state = {
@@ -56,7 +55,6 @@ class Login extends Component {
 }
 
 handleSignUpDropdown=(event)=> {
-  console.log("event", event.target.value)
     this.setState({value:event.target.value})
   }
 
@@ -120,7 +118,6 @@ handleSignUpDropdown=(event)=> {
   }
 
   signUpForm(){
-    console.log(this.state.value)
     return (
       <Card>
         <form onSubmit={(e) => this.fetchSignUp(e)}>
@@ -163,7 +160,7 @@ handleSignUpDropdown=(event)=> {
   }
 
   render(){
-    console.log("render: ", this.props.foundIdea);
+
     return(
       <div style={{backgroundImage: this.state.backgroundImage}}>
       <Row >
@@ -221,11 +218,15 @@ handleSignUpDropdown=(event)=> {
           </div>
           :
           <div>
+          <Card>
           <h1 className="about">ABOUT</h1>
           <p className="aboutWords">HAVE YOU EVER HAD A GOOD IDEA AND WANTED TO PITCH IT TO A COMPANY BUT DIDNT KNOW HOW?</p>
+
           <p className="aboutWords">OR ARE YOU A COMPANY THAT NEEDS AN IDEA BUT CAN'T COME UP WITH ONE?</p>
-          <p className="aboutWords">WE CONNECT ADVERTISERS WITH COMPANIES.  YOU SUBMIT AND IDEA AND IF A COMPANY LIKES IT THEY OFFER YOU SOME COLD HARD CASH</p>
+
+          <p className="aboutWords">WE CONNECT ADVERTISERS WITH COMPANIES.  YOU SUBMIT AN IDEA AND IF A COMPANY LIKES IT THEY OFFER YOU SOME COLD HARD CASH</p>
           <Button onClick={this.aboutClick}>LOG IN</Button>
+          </Card>
           </div>
         }
         </Col>
@@ -233,6 +234,6 @@ handleSignUpDropdown=(event)=> {
       </div>
     )
   }
-} // end of Login component
+}
 
 export default Login

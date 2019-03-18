@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './App.css';
 import 'semantic-ui-css/semantic.min.css';
 import UserForm from './UserForm'
-import IdeaDisplay from './IdeaDisplay'
 import 'materialize-css';
 import 'materialize-css/dist/css/materialize.min.css';
 import { Card, Button, Row, Col } from 'react-materialize'
@@ -14,7 +13,6 @@ class SeeMyIdeas extends Component{
   }
 
   render(){
-    console.log("otherIdeas", this.props.otherIdeas)
     return(
       <Card className="myIdeasCard">
       <div style={{backgroundImage: this.state.backgroundImage}} class="row">

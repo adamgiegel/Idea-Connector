@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-// import 'semantic-ui-css/semantic.min.css';
-// import { Card, Icon } from 'semantic-ui-react'
-// import 'semantic-ui-css/semantic.min.css';
-import IdeaDisplay from './IdeaDisplay'
 import 'materialize-css';
 import 'materialize-css/dist/css/materialize.min.css';
 import { Card, Button, Row, Col } from 'react-materialize'

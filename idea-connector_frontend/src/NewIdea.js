@@ -4,7 +4,6 @@ import 'semantic-ui-css/semantic.min.css';
 import { Card, Icon } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css';
 import UserForm from './UserForm'
-import IdeaDisplay from './IdeaDisplay'
 
 class NewIdea extends Component{
 

@@ -3,17 +3,13 @@ import './App.css';
 import 'semantic-ui-css/semantic.min.css';
 import { Card, Button, Icon, Label } from 'semantic-ui-react'
 import UserForm from './UserForm';
-import IdeaDisplay from './IdeaDisplay'
 import SeeMyIdeas from './SeeMyIdeas';
 import SelectedIdea from './SelectedIdea';
 import 'materialize-css';
 import 'materialize-css/dist/css/materialize.min.css';
-// import { Card, Button, Row, Col } from 'react-materialize'
-
 
 
 class SeeIdeas extends Component {
-
 
   state = {
     clicked: true,

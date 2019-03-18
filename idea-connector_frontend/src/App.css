@@ -108,7 +108,7 @@
 .ui.form {
   position: absolute;
   top: 10%;
-  left: 10%;
+  left: 25%;
 }
 
 .carousel {
@@ -143,7 +143,7 @@
 
 .idea1 {
   top: 50%;
-  right: 35%
+  right: 39%
 }
 
 .idea2 {
@@ -153,15 +153,15 @@
 
 
 .carousel {
-  left: 18%;
+  left: 14%;
 }
 
 .myIdeasCard {
-  left: 15%;
+  left: 12%;
 }
 
 .myIdeasCard2 {
-  left: 15%;
+  left: 12%;
 }
 
 .carouselCard {
@@ -206,7 +206,7 @@
 
 .likedIdeas {
   top: 50%;
-  left: 50%;
+  left: 49%;
 }
 
 .ideaList {
@@ -226,7 +226,7 @@
 }
 
 .yourIdeaCard {
-  left: 15%;
+  left: 12%;
 }
 
 .likedIdeasText {
@@ -268,4 +268,32 @@
   font-size: 1em;
   font-family: 'Anton';
   color: #4682B4;
+}
+
+.offer {
+  left: 80%;
+}
+
+.component {
+  background-color: brown;
+}
+
+.accepted {
+  color: green;
+}
+
+.rejected {
+  color: red;
+}
+
+.acceptOffer {
+  font-size: 1em;
+  font-family: 'Anton';
+  color: #D2691E;
+}
+
+.acceptOfferTitle {
+  font-size: 1em;
+  font-family: 'Anton';
+  color: #D2691E;
 }

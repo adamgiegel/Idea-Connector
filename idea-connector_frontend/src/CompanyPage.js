@@ -3,7 +3,6 @@ import './App.css';
 import 'semantic-ui-css/semantic.min.css';
 import { Card, Icon } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css';
-import IdeaDisplay from './IdeaDisplay'
 import SearchForm from './SearchForm'
 import EditCompanyForm from './EditCompanyForm'
 import ButtonExampleLabeled from './LikeButton'
@@ -18,8 +17,10 @@ class CompanyPage extends Component {
   state = {
     needIdeaClick: true,
     aboutClick: true,
-    search: ''
+    search: '',
   }
+
+
 
   handleChangeSearch = (e) => {
     this.setState({
@@ -49,9 +50,9 @@ handleAboutClick = () => {
 
   render() {
     return (
-      <div>
+      <div className="needs">
       {this.state.aboutClick ?
-        <div>
+        <div className='companyInfoDiv'>
           <p className="companyInfo">{this.props.currentUser.name}</p>
           <p className="companyInfo1">{this.props.currentUser.about}</p>
           <button class='ui button' onClick={this.handleAboutClick}>EDIT YOUR INFO</button>
@@ -73,7 +74,7 @@ handleAboutClick = () => {
 
 
     {this.state.needIdeaClick ?
-      <div>
+      <div className="needs">
       <Card className="needIdea" onClick={this.handleNeedIdea}
       image='https://media.giphy.com/media/RLUPuPHz1uqd5rJEFa/giphy.gif'
       description="NEED AN IDEA?"
@@ -93,13 +94,13 @@ handleAboutClick = () => {
 
       {this.props.ideaClick ?
         <SearchedIdeas
+        currentUser={this.props.currentUser}
         ideas={this.props.ideas}
         ideaClick={this.props.ideaClick}
         goBack={this.props.goBack}
         findIdea={this.props.findIdea}
         someLikes={this.props.likes}
         likedIdea={this.props.likedIdea}
-        likeIdea={this.props.likeIdea}
         updateIdeas={this.props.updateIdeas}/> :
         <IdeaList
         otherIdeas={this.filterCategories()}
@@ -115,11 +116,3 @@ handleAboutClick = () => {
 }
 
 export default CompanyPage;
-
-
-// onClick={this.goBack}
-
-// <SearchForm />
-// <All Ideas/>
-// <Ideas you selected>
-// <Email an Offer Form>
