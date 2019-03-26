@@ -1,3 +1,5 @@
+#IDEA CONNECTOR
+
 This React web app was designed to connect people who have creative advertising ideas with companies who need an idea.
 
 Contents
