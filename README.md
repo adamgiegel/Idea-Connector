@@ -48,9 +48,9 @@ I would like to implement an email feature so that companies can send emails to 
 I would like to implement Auth for the login page.
 
 ### Built With:
-React,
-Carousel Library,
-Materialize,
-Ruby on Rails
+- React
+- Carousel Library
+- Materialize
+- Ruby on Rails
 
 Link to Demo...https://youtu.be/0F3H-KJTDOU
