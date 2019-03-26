@@ -3,14 +3,13 @@
 This React web app was designed to connect people who have creative advertising ideas with companies who need an idea.
 
 ## Contents
-Libraries & Middleware
-Installation
-Structure
-Components
-User Accounts
-Future Development
+- Libraries
+- Installation
+- Structure
+- Components
+- Future Development
 
-## Libraries & Middleware
+## Libraries 
 Idea Connector was built using create-react-app and comes with the dependencies therein. React is used for state management, and the file structure is arranged accordingly; see below. React handles essential component transitions, including displaying the carousel, search, and log-in panels. Materialize manages the display. React Router handles component rendering and navigation. Carousel library was used on the homepage and company page.
 
 ## Installation
