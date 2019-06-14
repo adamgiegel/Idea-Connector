@@ -5,6 +5,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 import UserPage from './UserPage'
 import CompanyPage from './CompanyPage'
+import idea from './Ideas.jpg'
 import Navbar from './Navbar'
 import { BrowserRouter as Router, Redirect, Route } from "react-router-dom";
 import 'materialize-css';
@@ -27,7 +28,9 @@ state = {
     likedIdea: '',
     clickedIdea: true,
     clicked2: true,
-    shadup: true
+    shadup: true,
+    backgroundImage: 'url("https://www.bloopanimation.com/wp-content/uploads/2013/07/finding-story-ideas-1103x575.jpg")',
+    backgroundImage1: 'url("https://www.incimages.com/uploaded_files/image/1940x900/ideas-lightbulb-illo_1940x900_34046.jpg")',
   }
 
 componentDidMount(){
@@ -215,11 +218,10 @@ render() {
     <div>
     <div>
     <Row >
-    <div>
+    <div className="pic" style={{backgroundImage: this.state.backgroundImage}}>
     <h1 className="ideaConnector">IDEA CONNECTOR</h1>
     </div>
-    <div>
-    <Card>
+      <Card className="carousel">
         <Carousel className="carousel" infiniteLoop autoPlay height="1000px" width="900px" showThumbs={false}>
           {
             this.state.users.map(user => {
@@ -234,31 +236,14 @@ render() {
             })
           }
         </Carousel>
-        </Card>
-    </div>
-      <Col s={4}>
-      </Col>
-      <Col s={3} m={4}>
-        {
-        !this.state.shadup ?
-        <div>
-        <a onClick={this.aboutClick} class="btn-floating btn-large waves-effect waves-light blue"><i class="material-icons">arrow_back</i></a>
-        {this.state.showSignUp === false ? this.loginForm() : this.signUpForm()}
-        </div>
-        :
-        <div>
-        <Card>
-        <h1 className="about">ABOUT</h1>
-        <p className="aboutWords">HAVE YOU EVER HAD A GOOD IDEA AND WANTED TO PITCH IT TO A COMPANY BUT DIDNT KNOW HOW?</p>
+      </Card>
+    <div className="pic" style={{backgroundImage: 'url("https://cdn-images-1.medium.com/max/2600/1*GROvc_YXMFG1jATKoOtBVw.jpeg")'}}>
+    <h1 className="about">ABOUT</h1>
+        <h3 className="aboutWords">HAVE YOU EVER HAD A GOOD IDEA AND WANTED TO PITCH IT TO A COMPANY BUT DIDNT KNOW HOW?</h3>
 
-        <p className="aboutWords">OR ARE YOU A COMPANY THAT NEEDS AN IDEA BUT CAN'T COME UP WITH ONE?</p>
-
-        <p className="aboutWords">WE CONNECT ADVERTISERS WITH COMPANIES.  YOU SUBMIT AN IDEA AND IF A COMPANY LIKES IT THEY OFFER YOU SOME COLD HARD CASH</p>
-        <Button onClick={this.aboutClick}>LOG IN</Button>
-        </Card>
+        <h3 className="aboutWords">OR ARE YOU A COMPANY THAT NEEDS AN IDEA BUT CAN'T COME UP WITH ONE?</h3>
+        <h3 className="aboutWords">WE CONNECT ADVERTISERS WITH COMPANIES.  YOU SUBMIT AN IDEA AND IF A COMPANY LIKES IT THEY OFFER YOU SOME COLD HARD CASH</h3>
         </div>
-      }
-      </Col>
     </Row>
     </div>
     </div>

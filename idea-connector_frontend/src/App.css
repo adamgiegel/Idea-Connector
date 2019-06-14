@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Anton');
 @import url('https://fonts.googleapis.com/css?family=Karla');
 @import url('https://fonts.googleapis.com/css?family=Courgette');
+@import url('https://fonts.googleapis.com/css?family=Arapey');
+
 
 .App {
   text-align: center;
@@ -153,7 +155,8 @@
 
 
 .carousel {
-  left: 14%;
+  height: 1200px;
+  background-color: #808080;
 }
 
 .myIdeasCard {
@@ -178,8 +181,12 @@
 
 .ideaConnector {
   font-size: 10em;
-  font-family: 'Anton';
-  color: #D2691E;
+  font-family: 'Arapey';
+  color: white;
+}
+
+.homeCarousel {
+  color: brown;
 }
 
 .cardColor {
@@ -187,9 +194,9 @@
 }
 
 .about{
-  font-size: 6em;
-  font-family: 'Anton';
-  color: #D2691E;
+  font-size: 15em;
+  font-family: 'Arapey';
+  color: white;
 }
 
 .yourIdea{
@@ -199,8 +206,8 @@
 }
 
 .aboutWords{
-  font-size: 15px;
-  font-family: 'Karla';
+  font-size: 3em;
+  font-family: 'Arapey';
   color: black;
 }
 
@@ -296,4 +303,10 @@
   font-size: 1em;
   font-family: 'Anton';
   color: #D2691E;
+}
+
+.pic {
+ background-size: cover;
+ background-repeat: no-repeat;
+ height: 500px;
 }
