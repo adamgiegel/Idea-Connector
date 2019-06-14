@@ -3,6 +3,10 @@ import 'materialize-css';
 import 'materialize-css/dist/css/materialize.min.css';
 import { Card, Button, Row, Col } from 'react-materialize'
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import UserPage from './UserPage'
+import CompanyPage from './CompanyPage'
+import { BrowserRouter as Router, Redirect, Route } from "react-router-dom";
+import Navbar from './Navbar'
 import { Carousel } from 'react-responsive-carousel';
 
 class Login extends Component {
@@ -10,6 +14,8 @@ class Login extends Component {
     showSignUp: false,
     name: '',
     about: '',
+    loggedIn: false,
+    currentUser: '',
     username: '',
     password: '',
     about: '',
@@ -58,6 +64,58 @@ handleSignUpDropdown=(event)=> {
     this.setState({value:event.target.value})
   }
 
+  fetchUser(username, password){
+    if (this.state.value === 'user'){
+    fetch('http://localhost:3000/api/v1/users/login', {
+    method: "POST",
+    headers:{
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    },
+    body:JSON.stringify({
+      "username": username,
+      "password": password,
+    }),
+  })
+  .then(res => res.json())
+  .then(res => {
+    if(res.error){
+      alert(res.error)
+    } else {
+      console.log(this.state.loggedIn)
+      this.setState({
+        currentUser: res,
+        loggedIn: true,
+      })
+      console.log(this.state.loggedIn)
+    }
+   })
+  } else if (this.state.value === 'company') {
+    fetch('http://localhost:3000/api/v1/login', {
+      method: "POST",
+      headers:{
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body:JSON.stringify({
+        "username": username,
+        "password": password,
+      }),
+    })
+    .then(res => res.json())
+    .then(res => {
+      if(res.error){
+        alert(res.error)
+      } else {
+        this.setState({
+          currentUser: res,
+          loggedIn: true,
+        })
+      }
+     })
+  }
+  }
+
   handleChange = (e) =>{
     if (e.target.name === 'name'){
       this.setState({
@@ -88,14 +146,31 @@ handleSignUpDropdown=(event)=> {
     })
   }
 
+  handleLogin =(e, username, password) => {//handles the login event and receives username and password from Login.js
+    e.preventDefault()
+    console.log(username, password)
+    this.fetchUser(username, password)
+  }
+
+  handleLogout = () => {//sets the state of currentUser back to an empty string and loggedIn back to false
+    this.setState({
+      currentUser: '',
+      loggedIn: false
+    })
+  }
+
+  handleChangeDropdown=(event)=> {//handles the dropdown change in state
+    console.log("event", event.target.value)
+      this.setState({value:event.target.value})
+    }
 
   loginForm(){
     return(
       <Card className="login">
-        <form onSubmit={(e) => this.props.handleLogin(e, this.state.username, this.state.password)}>
+        <form onSubmit={(e) => this.handleLogin(e, this.state.username, this.state.password)}>
         <div>
         <label></label>
-          <select value={this.props.value} onChange={(event) => this.props.handleChangeDropdown(event)}class="browser-default">
+          <select value={this.state.value} onChange={(event) => this.handleChangeDropdown(event)}class="browser-default">
             <option >ARE YOU A</option>
             <option value="user">USER</option>
             <option value="company">COMPANY</option>
@@ -159,81 +234,166 @@ handleSignUpDropdown=(event)=> {
     })
   }
 
+  dashBoardRoute(){
+    if (this.state.loggedIn === true){
+        return this.dashBoardComponents()
+    } else if (this.state.loggedIn === false){
+        return <Redirect to="/" />
+    }
+  }
+
+  dashBoardComponents() {
+    return (
+      <div>
+        <div>
+          <div className="App" >
+            <Navbar currentUser={this.state.currentUser} handleLogout={this.handleLogout}/>
+          </div>
+        </div>
+          {
+            this.state.value === "company" ?
+              <CompanyPage
+                ideas={this.state.ideas}
+                clickedIdea={this.state.clickedIdea}
+                clickedIdeaBack={this.clickedIdeaBack}
+                handleClickedIdea={this.handleClickedIdea}
+                handleChangeSearch={this.handleChangeSearch}
+                search={this.state.search}
+                foundIdea={this.foundIdea}
+                findIdea={this.state.foundIdea}
+                ideaClick={this.state.ideaClick}
+                goBack={this.goBack}
+                likedIdea={this.state.likedIdea}
+                updateIdeas={this.updateIdeas}
+                users={this.state.users}
+                companies={this.state.companies}
+                currentUser={this.state.currentUser}
+                newCompany={this.newCompany}/>
+              :
+            <div className="ui container">
+              <UserPage
+                clicked2={this.state.clicked2}
+                deleteIdeaBack={this.deleteIdeaBack}
+                ideas={this.state.ideas}
+                currentUser={this.state.currentUser}
+                foundIdea={this.state.foundIdea}
+                addNewIdea={this.addNewIdea}
+                deleteIdea={this.deleteIdea}/>
+            </div>
+          }
+      </div>
+    )
+  }
+
+
   render(){
 
     return(
-      <div style={{backgroundImage: this.state.backgroundImage}}>
-      <Row >
       <div>
-      <h1 className="ideaConnector">IDEA CONNECTOR</h1>
-      </div>
-      {this.props.clickedIdea ?
-      <div>
-      <Card>
-          <Carousel className="carousel" infiniteLoop autoPlay height="1000px" width="900px" showThumbs={false}>
-            {
-              this.props.users.map(user => {
-                return user.ideas.map(idea => {
-                  return (
-                    <div onClick={() => this.props.handleClickedIdea(idea.id)} key={idea.id}>
-                    <img height="400px" src={idea.image}/>
-                    <p className="legend">{idea.description.substring(0, 100)}...</p>
-                    </div>
-                  )
-                })
-              })
-            }
-          </Carousel>
-          </Card>
-      </div>
-      :
-      <Card>
       <div>
       {
-        this.props.foundIdea.map(idea => {
-          return (
-            <div>
-            <div>
-            <iframe height="300px" width="500px" src={idea.video}/>
-            <p class="flow-text grey-text text-darken-2">{idea.description}</p>
-            </div>
-            <div>
-            <Button className="blue lighten-2" onClick={this.props.clickedIdeaBack}>GO BACK</Button>
-            </div>
-            </div>
-          )
-        })
-    }
+      this.state.loggedIn ? this.dashBoardRoute() :
+      <div>
+      <a onClick={this.aboutClick} class="btn-floating btn-large waves-effect waves-light blue"><i class="material-icons">arrow_back</i></a>
+      {this.state.showSignUp === false ? this.loginForm() : this.signUpForm()}
       </div>
-      </Card>
-    }
-        <Col s={4}>
-        </Col>
-        <Col s={3} m={4}>
-          {
-          !this.state.shadup ?
-          <div>
-          <a onClick={this.aboutClick} class="btn-floating btn-large waves-effect waves-light blue"><i class="material-icons">arrow_back</i></a>
-          {this.state.showSignUp === false ? this.loginForm() : this.signUpForm()}
-          </div>
-          :
-          <div>
-          <Card>
-          <h1 className="about">ABOUT</h1>
-          <p className="aboutWords">HAVE YOU EVER HAD A GOOD IDEA AND WANTED TO PITCH IT TO A COMPANY BUT DIDNT KNOW HOW?</p>
-
-          <p className="aboutWords">OR ARE YOU A COMPANY THAT NEEDS AN IDEA BUT CAN'T COME UP WITH ONE?</p>
-
-          <p className="aboutWords">WE CONNECT ADVERTISERS WITH COMPANIES.  YOU SUBMIT AN IDEA AND IF A COMPANY LIKES IT THEY OFFER YOU SOME COLD HARD CASH</p>
-          <Button onClick={this.aboutClick}>LOG IN</Button>
-          </Card>
-          </div>
-        }
-        </Col>
-      </Row>
+      }
+      </div>
       </div>
     )
   }
 }
 
 export default Login
+
+
+//inside render
+// <div>
+// <Row >
+// <div>
+// <h1 className="ideaConnector">IDEA CONNECTOR</h1>
+// </div>
+// {this.props.clickedIdea ?
+// <div>
+// <Card>
+//     <Carousel className="carousel" infiniteLoop autoPlay height="1000px" width="900px" showThumbs={false}>
+//       {
+//         this.props.users.map(user => {
+//           return user.ideas.map(idea => {
+//             return (
+//               <div onClick={() => this.props.handleClickedIdea(idea.id)} key={idea.id}>
+//               <img height="400px" src={idea.image}/>
+//               <p className="legend">{idea.description.substring(0, 100)}...</p>
+//               </div>
+//             )
+//           })
+//         })
+//       }
+//     </Carousel>
+//     </Card>
+// </div>
+// :
+// <Card>
+// <div>
+// {
+//   this.props.foundIdea.map(idea => {
+//     return (
+//       <div>
+//       <div>
+//       <iframe height="300px" width="500px" src={idea.video}/>
+//       <p class="flow-text grey-text text-darken-2">{idea.description}</p>
+//       </div>
+//       <div>
+//       <Button className="blue lighten-2" onClick={this.props.clickedIdeaBack}>GO BACK</Button>
+//       </div>
+//       </div>
+//     )
+//   })
+// }
+// </div>
+// </Card>
+// }
+//   <Col s={4}>
+//   </Col>
+//   <Col s={3} m={4}>
+//     {
+//     !this.state.shadup ?
+//     <div>
+//     <a onClick={this.aboutClick} class="btn-floating btn-large waves-effect waves-light blue"><i class="material-icons">arrow_back</i></a>
+//     {this.state.showSignUp === false ? this.loginForm() : this.signUpForm()}
+//     </div>
+//     :
+//     <div>
+//     <Card>
+//     <h1 className="about">ABOUT</h1>
+//     <p className="aboutWords">HAVE YOU EVER HAD A GOOD IDEA AND WANTED TO PITCH IT TO A COMPANY BUT DIDNT KNOW HOW?</p>
+//
+//     <p className="aboutWords">OR ARE YOU A COMPANY THAT NEEDS AN IDEA BUT CAN'T COME UP WITH ONE?</p>
+//
+//     <p className="aboutWords">WE CONNECT ADVERTISERS WITH COMPANIES.  YOU SUBMIT AN IDEA AND IF A COMPANY LIKES IT THEY OFFER YOU SOME COLD HARD CASH</p>
+//     <Button onClick={this.aboutClick}>LOG IN</Button>
+//     </Card>
+//     </div>
+//   }
+//   </Col>
+// </Row>
+// </div>
+
+
+// aboutClick = () => {
+//   this.setState({
+//     shadup: !this.state.shadup
+//   })
+// }
+//
+// <div className="App">
+//   <Login
+//       handleChangeDropdown={this.handleChangeDropdown}
+//       handleLogin={this.handleLogin}
+//       value={this.state.value}
+//       users={this.state.users}
+//       foundIdea={this.state.foundIdea}
+//       handleClickedIdea={this.handleClickedIdea}
+//       clickedIdea={this.state.clickedIdea}
+//       clickedIdeaBack={this.clickedIdeaBack}/>
+// </div>

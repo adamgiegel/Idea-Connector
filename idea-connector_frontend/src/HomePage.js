@@ -7,7 +7,6 @@ import UserPage from './UserPage'
 import CompanyPage from './CompanyPage'
 import Navbar from './Navbar'
 import { BrowserRouter as Router, Redirect, Route } from "react-router-dom";
-import './App.css';
 import 'materialize-css';
 import 'materialize-css/dist/css/materialize.min.css';
 import { Card, Button, Row, Col } from 'react-materialize'
@@ -27,7 +26,8 @@ state = {
     ideaClick: '',
     likedIdea: '',
     clickedIdea: true,
-    clicked2: true
+    clicked2: true,
+    shadup: true
   }
 
 componentDidMount(){
@@ -54,55 +54,6 @@ componentDidMount(){
   })
 }
 
-fetchUser(username, password){
-  if (this.state.value === 'user'){
-  fetch('http://localhost:3000/api/v1/users/login', {
-  method: "POST",
-  headers:{
-    "Content-Type": "application/json",
-    "Accept": "application/json"
-  },
-  body:JSON.stringify({
-    "username": username,
-    "password": password,
-  }),
-})
-.then(res => res.json())
-.then(res => {
-  if(res.error){
-    alert(res.error)
-  } else {
-    this.setState({
-      currentUser: res,
-      loggedIn: true,
-    })
-  }
- })
-} else if (this.state.value === 'company') {
-  fetch('http://localhost:3000/api/v1/login', {
-    method: "POST",
-    headers:{
-      "Content-Type": "application/json",
-      "Accept": "application/json"
-    },
-    body:JSON.stringify({
-      "username": username,
-      "password": password,
-    }),
-  })
-  .then(res => res.json())
-  .then(res => {
-    if(res.error){
-      alert(res.error)
-    } else {
-      this.setState({
-        currentUser: res,
-        loggedIn: true,
-      })
-    }
-   })
-}
-}
 
 clickedIdeaBack = () => {//to set the state of clickedIdea to the opposite of what the state is...used in Carousel
   this.setState({
@@ -136,9 +87,10 @@ fetch(`http://localhost:3000/api/v1/likes`, {
 })
 .then(res => res.json())
 .then(like => {
+  console.log("like", like)
   this.setState({
-    likedIdea: like
-  })
+    foundIdea: [...this.state.ideas, like]
+  }, () => console.log(this.state.foundIdea))
 })
 }
 
@@ -174,10 +126,6 @@ goBack = () => {
   })
 }
 
-handleChangeDropdown=(event)=> {//handles the dropdown change in state
-  console.log("event", event.target.value)
-    this.setState({value:event.target.value})
-  }
 
 
 
@@ -195,17 +143,6 @@ newCompany = (id, name, about, email, contact) => {//used to update the state fo
     })
 }
 
-handleLogin =(e, username, password) => {//handles the login event and receives username and password from Login.js
-  e.preventDefault()
-  this.fetchUser(username, password)
-}
-
-handleLogout = () => {//sets the state of currentUser back to an empty string and loggedIn back to false
-  this.setState({
-    currentUser: '',
-    loggedIn: false
-  })
-}
 
 foundIdea = (id) => {//finds the selected idea when clicked on by the company in the list of ideas
   const foundIdea = this.state.users.map(user => {
@@ -266,35 +203,178 @@ dashBoardComponents() {
 }
 
 
-dashBoardRoute(){
-  if (this.state.loggedIn === true){
-      return <Route path="/dashboard" render={() => this.dashBoardComponents()} />
-  } else if (this.state.loggedIn === false){
-      return <Redirect to="/" />
-  }
+aboutClick = () => {
+  this.setState({
+    shadup: !this.state.shadup
+  })
 }
 
 render() {
+  console.log(this.state.foundIdea)
   return (
-    <Router>
-      <div className="App">
-        <Route exact path="/" render={()=>(
-          this.state.loggedIn ? (<Redirect to="/dashboard"/>) : (<Login
-            handleChangeDropdown={this.handleChangeDropdown}
-            handleLogin={this.handleLogin}
-            value={this.state.value}
-            users={this.state.users}
-            foundIdea={this.state.foundIdea}
-            handleClickedIdea={this.handleClickedIdea}
-            clickedIdea={this.state.clickedIdea}
-            clickedIdeaBack={this.clickedIdeaBack}/>)
-        )} />
-        {this.dashBoardRoute()}
-      </div>
-    </Router>
+    <div>
+    <div>
+    <Row >
+    <div>
+    <h1 className="ideaConnector">IDEA CONNECTOR</h1>
+    </div>
+    <div>
+    <Card>
+        <Carousel className="carousel" infiniteLoop autoPlay height="1000px" width="900px" showThumbs={false}>
+          {
+            this.state.users.map(user => {
+              return user.ideas.map(idea => {
+                return (
+                  <div onClick={() => this.handleClickedIdea(idea.id)} key={idea.id}>
+                  <img height="400px" src={idea.image}/>
+                  <p className="legend">{idea.description.substring(0, 100)}...</p>
+                  </div>
+                )
+              })
+            })
+          }
+        </Carousel>
+        </Card>
+    </div>
+      <Col s={4}>
+      </Col>
+      <Col s={3} m={4}>
+        {
+        !this.state.shadup ?
+        <div>
+        <a onClick={this.aboutClick} class="btn-floating btn-large waves-effect waves-light blue"><i class="material-icons">arrow_back</i></a>
+        {this.state.showSignUp === false ? this.loginForm() : this.signUpForm()}
+        </div>
+        :
+        <div>
+        <Card>
+        <h1 className="about">ABOUT</h1>
+        <p className="aboutWords">HAVE YOU EVER HAD A GOOD IDEA AND WANTED TO PITCH IT TO A COMPANY BUT DIDNT KNOW HOW?</p>
+
+        <p className="aboutWords">OR ARE YOU A COMPANY THAT NEEDS AN IDEA BUT CAN'T COME UP WITH ONE?</p>
+
+        <p className="aboutWords">WE CONNECT ADVERTISERS WITH COMPANIES.  YOU SUBMIT AN IDEA AND IF A COMPANY LIKES IT THEY OFFER YOU SOME COLD HARD CASH</p>
+        <Button onClick={this.aboutClick}>LOG IN</Button>
+        </Card>
+        </div>
+      }
+      </Col>
+    </Row>
+    </div>
+    </div>
   );
 }
 
 }
 
 export default HomePage;
+
+//inside render
+// <Router>
+//   <div className="App">
+//     <Route exact path="/" render={()=>(
+//       this.state.loggedIn ? (<Redirect to="/dashboard"/>) : (<Login
+//         handleChangeDropdown={this.handleChangeDropdown}
+//         handleLogin={this.handleLogin}
+//         value={this.state.value}
+//         users={this.state.users}
+//         foundIdea={this.state.foundIdea}
+//         handleClickedIdea={this.handleClickedIdea}
+//         clickedIdea={this.state.clickedIdea}
+//         clickedIdeaBack={this.clickedIdeaBack}/>)
+//     )} />
+//     {this.dashBoardRoute()}
+//   </div>
+// </Router>
+
+// :
+// <Card>
+// <div>
+// {
+//   this.foundIdea.map(idea => {
+//     return (
+//       <div>
+//       <div>
+//       <iframe height="300px" width="500px" src={idea.video}/>
+//       <p class="flow-text grey-text text-darken-2">{idea.description}</p>
+//       </div>
+//       <div>
+//       <Button className="blue lighten-2" onClick={this.clickedIdeaBack}>GO BACK</Button>
+//       </div>
+//       </div>
+//     )
+//   })
+// }
+// </div>
+// </Card>
+// }
+
+// dashBoardRoute(){
+//   if (this.state.loggedIn === true){
+//       return <Route path="/dashboard" render={() => this.dashBoardComponents()} />
+//   } else if (this.state.loggedIn === false){
+//       return <Redirect to="/" />
+//   }
+// }
+
+// fetchUser(username, password){
+//   if (this.state.value === 'user'){
+//   fetch('http://localhost:3000/api/v1/users/login', {
+//   method: "POST",
+//   headers:{
+//     "Content-Type": "application/json",
+//     "Accept": "application/json"
+//   },
+//   body:JSON.stringify({
+//     "username": username,
+//     "password": password,
+//   }),
+// })
+// .then(res => res.json())
+// .then(res => {
+//   if(res.error){
+//     alert(res.error)
+//   } else {
+//     this.setState({
+//       currentUser: res,
+//       loggedIn: true,
+//     })
+//   }
+//  })
+// } else if (this.state.value === 'company') {
+//   fetch('http://localhost:3000/api/v1/login', {
+//     method: "POST",
+//     headers:{
+//       "Content-Type": "application/json",
+//       "Accept": "application/json"
+//     },
+//     body:JSON.stringify({
+//       "username": username,
+//       "password": password,
+//     }),
+//   })
+//   .then(res => res.json())
+//   .then(res => {
+//     if(res.error){
+//       alert(res.error)
+//     } else {
+//       this.setState({
+//         currentUser: res,
+//         loggedIn: true,
+//       })
+//     }
+//    })
+// }
+// }
+
+// handleLogin =(e, username, password) => {//handles the login event and receives username and password from Login.js
+//   e.preventDefault()
+//   this.fetchUser(username, password)
+// }
+//
+// handleLogout = () => {//sets the state of currentUser back to an empty string and loggedIn back to false
+//   this.setState({
+//     currentUser: '',
+//     loggedIn: false
+//   })
+// }
