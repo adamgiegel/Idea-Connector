@@ -11,8 +11,11 @@ import * as serviceWorker from './serviceWorker';
 const routing = (
   <Router>
     <div>
-    <nav>
-      <div class="nav-wrapper">
+    <Route exact path="/" component={App} />
+    <Route path="/homepage" component={HomePage} />
+    <Route path="/login" component={Login} />
+    <nav class="nav-wrapper">
+      <div>
       <SocialIcon url="https://www.linkedin.com/in/adam-giegel-ba5579a6/" style={{ height: 40, width: 40 }} bgColor="white" target="_blank"/>{' '}
       <SocialIcon url="https://medium.com/@adamgiegel" style={{ height: 40, width: 40 }} network="medium" bgColor="white" target="_blank"/>{'  '}
       <SocialIcon url="https://github.com/adamgiegel" style={{ height: 40, width: 40 }} network="github" bgColor="white" target="_blank"/>{'  '}
@@ -34,9 +37,6 @@ const routing = (
         </ul>
       </div>
     </nav>
-      <Route exact path="/" component={App} />
-      <Route path="/homepage" component={HomePage} />
-      <Route path="/login" component={Login} />
     </div>
   </Router>
 )

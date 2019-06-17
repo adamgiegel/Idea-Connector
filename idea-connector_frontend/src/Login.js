@@ -64,7 +64,7 @@ handleSignUpDropdown=(event)=> {
     this.setState({value:event.target.value})
   }
 
-  fetchUser(username, password){
+  fetchUser = (username, password) => {
     if (this.state.value === 'user'){
     fetch('http://localhost:3000/api/v1/users/login', {
     method: "POST",
@@ -164,69 +164,6 @@ handleSignUpDropdown=(event)=> {
       this.setState({value:event.target.value})
     }
 
-  loginForm(){
-    return(
-      <Card className="login">
-        <form onSubmit={(e) => this.handleLogin(e, this.state.username, this.state.password)}>
-        <div>
-        <label></label>
-          <select value={this.state.value} onChange={(event) => this.handleChangeDropdown(event)}class="browser-default">
-            <option >ARE YOU A</option>
-            <option value="user">USER</option>
-            <option value="company">COMPANY</option>
-          </select>
-        </div>
-          <label>
-            Username:
-            <input value={this.state.username} onChange={(e) => this.handleChange(e)} type="text" name="username" placeholder="user your username"/>
-          </label>
-          <label>
-            Password:
-            <input value={this.state.password} onChange={(e) => this.handleChange(e)} type="password" name="password"/>
-          </label>
-          <Button className="blue lighten-2">Submit</Button>
-          </form>
-          <br/>
-          <Button className="blue lighten-2" onClick={this.handleSignUpButton}>SignUp</Button>
-      </Card>
-    )
-  }
-
-  signUpForm(){
-    return (
-      <Card>
-        <form onSubmit={(e) => this.fetchSignUp(e)}>
-        <div>
-        <label></label>
-          <select value={this.state.value} onChange={this.handleSignUpDropdown}class="browser-default">
-            <option >ARE YOU A</option>
-            <option value="user">USER</option>
-            <option value="company">COMPANY</option>
-          </select>
-        </div>
-        <label>
-          Name or Company Name:
-          <input value={this.state.name} onChange={(e) => this.handleChange(e)} type="text" name="name" placeholder="Name please"/>
-        </label>
-        <label>
-          About:
-          <input value={this.state.about} onChange={(e) => this.handleChange(e)} type="text" name="about" placeholder="Tell us about yourself or your company"/>
-        </label>
-          <label>
-            Username:
-            <input value={this.state.username} onChange={(e) => this.handleChange(e)} type="text" name="username" placeholder="What should we call you?"/>
-          </label>
-          <label>
-            Password:
-            <input value={this.state.password} onChange={(e) => this.handleChange(e)} type="password" name="password" placeholder='Make it secret.'/>
-          </label>
-          <Button className="blue lighten-2">Submit</Button>
-        </form>
-        <Button  className="blue lighten-2" onClick={this.handleSignUpButton}>Login Page</Button>
-        <br/>
-      </Card>
-    )
-  }
 
   aboutClick = () => {
     this.setState({
@@ -234,69 +171,118 @@ handleSignUpDropdown=(event)=> {
     })
   }
 
-  dashBoardRoute(){
-    if (this.state.loggedIn === true){
-        return this.dashBoardComponents()
-    } else if (this.state.loggedIn === false){
-        return <Redirect to="/" />
-    }
-  }
-
-  dashBoardComponents() {
-    return (
-      <div>
-        <div>
-          <div className="App" >
-            <Navbar currentUser={this.state.currentUser} handleLogout={this.handleLogout}/>
-          </div>
-        </div>
-          {
-            this.state.value === "company" ?
-              <CompanyPage
-                ideas={this.state.ideas}
-                clickedIdea={this.state.clickedIdea}
-                clickedIdeaBack={this.clickedIdeaBack}
-                handleClickedIdea={this.handleClickedIdea}
-                handleChangeSearch={this.handleChangeSearch}
-                search={this.state.search}
-                foundIdea={this.foundIdea}
-                findIdea={this.state.foundIdea}
-                ideaClick={this.state.ideaClick}
-                goBack={this.goBack}
-                likedIdea={this.state.likedIdea}
-                updateIdeas={this.updateIdeas}
-                users={this.state.users}
-                companies={this.state.companies}
-                currentUser={this.state.currentUser}
-                newCompany={this.newCompany}/>
-              :
-            <div className="ui container">
-              <UserPage
-                clicked2={this.state.clicked2}
-                deleteIdeaBack={this.deleteIdeaBack}
-                ideas={this.state.ideas}
-                currentUser={this.state.currentUser}
-                foundIdea={this.state.foundIdea}
-                addNewIdea={this.addNewIdea}
-                deleteIdea={this.deleteIdea}/>
-            </div>
-          }
-      </div>
-    )
-  }
-
-
   render(){
-
     return(
       <div>
-      <div>
-      {
-      this.state.loggedIn ? this.dashBoardRoute() :
-      <div>
-      <a onClick={this.aboutClick} class="btn-floating btn-large waves-effect waves-light blue"><i class="material-icons">arrow_back</i></a>
-      {this.state.showSignUp === false ? this.loginForm() : this.signUpForm()}
-      </div>
+      <div className="App">
+        {this.state.loggedIn ?
+          this.state.value === "company" ?
+            <CompanyPage
+              ideas={this.state.ideas}
+              clickedIdea={this.state.clickedIdea}
+              clickedIdeaBack={this.clickedIdeaBack}
+              handleClickedIdea={this.handleClickedIdea}
+              handleChangeSearch={this.handleChangeSearch}
+              search={this.state.search}
+              foundIdea={this.foundIdea}
+              findIdea={this.state.foundIdea}
+              ideaClick={this.state.ideaClick}
+              goBack={this.goBack}
+              likedIdea={this.state.likedIdea}
+              updateIdeas={this.updateIdeas}
+              users={this.state.users}
+              companies={this.state.companies}
+              currentUser={this.state.currentUser}
+              newCompany={this.newCompany}/>
+            :
+          <div className="App">
+            <UserPage
+              clicked2={this.state.clicked2}
+              deleteIdeaBack={this.deleteIdeaBack}
+              ideas={this.state.ideas}
+              currentUser={this.state.currentUser}
+              foundIdea={this.state.foundIdea}
+              addNewIdea={this.addNewIdea}
+              deleteIdea={this.deleteIdea}/>
+          </div>
+        :
+        <div>
+        {this.state.showSignUp === false ?
+          <div className="pic" style={{backgroundImage: 'url("https://digitalready.co/sites/default/files/styles/1000x427/public/best-innovative-and-creative-facebook-ads-from-famous-brands.jpg?itok=UB_QOW2l")'}}>
+          <br></br>
+          <br></br>
+          <br></br>
+          <div className="row">
+          <br></br>
+          <br></br>
+        <div class="col s6">
+          <div class="login card small">
+          <Card>
+            <form onSubmit={(e) => this.handleLogin(e, this.state.username, this.state.password)}>
+            <div>
+            <label></label>
+              <select value={this.state.value} onChange={(event) => this.handleChangeDropdown(event)}class="browser-default">
+                <option >ARE YOU A</option>
+                <option value="user">USER</option>
+                <option value="company">COMPANY</option>
+              </select>
+            </div>
+              <label>
+                Username:
+                <input value={this.state.username} onChange={(e) => this.handleChange(e)} type="text" name="username" placeholder="user your username"/>
+              </label>
+              <label>
+                Password:
+                <input value={this.state.password} onChange={(e) => this.handleChange(e)} type="password" name="password"/>
+              </label>
+              <Button className="blue lighten-2">Submit</Button>
+              </form>
+              <br/>
+              <Button className="blue lighten-2" onClick={this.handleSignUpButton}>SignUp</Button>
+              </Card>
+          </div>
+          </div>
+          </div>
+          <br></br>
+          <br></br>
+          <br></br>
+          <div className="pic" style={{backgroundImage: 'url("https://images.fastcompany.net/image/upload/w_1280,f_auto,q_auto,fl_lossy/fc/3045058-poster-p-1-4-strategies-for-introducing-new-ideas-at-work.jpg")'}}>
+          </div>
+          </div>
+          :
+          <Card>
+            <form onSubmit={(e) => this.fetchSignUp(e)}>
+            <div>
+            <label></label>
+              <select value={this.state.value} onChange={this.handleSignUpDropdown}class="browser-default">
+                <option >ARE YOU A</option>
+                <option value="user">USER</option>
+                <option value="company">COMPANY</option>
+              </select>
+            </div>
+            <label>
+              Name or Company Name:
+              <input value={this.state.name} onChange={(e) => this.handleChange(e)} type="text" name="name" placeholder="Name please"/>
+            </label>
+            <label>
+              About:
+              <input value={this.state.about} onChange={(e) => this.handleChange(e)} type="text" name="about" placeholder="Tell us about yourself or your company"/>
+            </label>
+              <label>
+                Username:
+                <input value={this.state.username} onChange={(e) => this.handleChange(e)} type="text" name="username" placeholder="What should we call you?"/>
+              </label>
+              <label>
+                Password:
+                <input value={this.state.password} onChange={(e) => this.handleChange(e)} type="password" name="password" placeholder='Make it secret.'/>
+              </label>
+              <Button className="blue lighten-2">Submit</Button>
+            </form>
+            <Button  className="blue lighten-2" onClick={this.handleSignUpButton}>Login Page</Button>
+            <br/>
+          </Card>
+        }
+        </div>
       }
       </div>
       </div>

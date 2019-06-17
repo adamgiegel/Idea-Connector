@@ -28,16 +28,17 @@ class NewIdea extends Component{
     return(
       <div>
       {this.state.chosen ?
-      <div>
-      <Card className="idea1" onClick={this.handleNewFormClick}
-      image='https://media.giphy.com/media/tJdCvTmdJdhQSf4tGj/giphy.gif'
-      description="HAVE AN IDEA?"
-      />
+      <div className="pic" style={{backgroundImage: 'url("https://images.fastcompany.net/image/upload/w_1280,f_auto,q_auto,fl_lossy/fc/3045058-poster-p-1-4-strategies-for-introducing-new-ideas-at-work.jpg")'}}>
+      <h1 className="aboutWords" onClick={this.handleNewFormClick}>CLICK ME</h1>
       </div>
-      : <UserForm className="userForm"
+      :
+      <div className="form">
+      <UserForm
       currentUser={this.props.currentUser}
       handleFormBack={this.handleFormBack}
-      addNewIdea={this.props.addNewIdea}/>}
+      addNewIdea={this.props.addNewIdea}/>
+      </div>
+      }
       </div>
     )
   }

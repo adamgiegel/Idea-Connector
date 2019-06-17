@@ -7,6 +7,7 @@ import UserPage from './UserPage'
 import CompanyPage from './CompanyPage'
 import idea from './Ideas.jpg'
 import Navbar from './Navbar'
+import NewCarousel from './NewCarousel.js'
 import { BrowserRouter as Router, Redirect, Route } from "react-router-dom";
 import 'materialize-css';
 import 'materialize-css/dist/css/materialize.min.css';
@@ -76,7 +77,7 @@ handleClickedIdea = (id) => {//find the specific idea from the passed in id loca
   this.setState({
     foundIdea: findIdea,
     clickedIdea: !this.state.clickedIdea,
-  })
+  }, console.log("found Idea", this.state.foundIdea))
 }
 
 updateIdeas = (id) => {//is a Patch to update the num_likes on the backend
@@ -162,48 +163,6 @@ foundIdea = (id) => {//finds the selected idea when clicked on by the company in
   })
 }
 
-dashBoardComponents() {
-  return (
-    <div>
-      <div>
-        <div className="App" >
-          <Navbar currentUser={this.state.currentUser} handleLogout={this.handleLogout}/>
-        </div>
-      </div>
-        {
-          this.state.value === "company" ?
-            <CompanyPage
-              ideas={this.state.ideas}
-              clickedIdea={this.state.clickedIdea}
-              clickedIdeaBack={this.clickedIdeaBack}
-              handleClickedIdea={this.handleClickedIdea}
-              handleChangeSearch={this.handleChangeSearch}
-              search={this.state.search}
-              foundIdea={this.foundIdea}
-              findIdea={this.state.foundIdea}
-              ideaClick={this.state.ideaClick}
-              goBack={this.goBack}
-              likedIdea={this.state.likedIdea}
-              updateIdeas={this.updateIdeas}
-              users={this.state.users}
-              companies={this.state.companies}
-              currentUser={this.state.currentUser}
-              newCompany={this.newCompany}/>
-            :
-          <div className="ui container">
-            <UserPage
-              clicked2={this.state.clicked2}
-              deleteIdeaBack={this.deleteIdeaBack}
-              ideas={this.state.ideas}
-              currentUser={this.state.currentUser}
-              foundIdea={this.state.foundIdea}
-              addNewIdea={this.addNewIdea}
-              deleteIdea={this.deleteIdea}/>
-          </div>
-        }
-    </div>
-  )
-}
 
 
 aboutClick = () => {
@@ -217,34 +176,22 @@ render() {
   return (
     <div>
     <div>
-    <Row >
     <div className="pic" style={{backgroundImage: this.state.backgroundImage}}>
+    <br></br>
     <h1 className="ideaConnector">IDEA CONNECTOR</h1>
     </div>
-      <Card className="carousel">
-        <Carousel className="carousel" infiniteLoop autoPlay height="1000px" width="900px" showThumbs={false}>
-          {
-            this.state.users.map(user => {
-              return user.ideas.map(idea => {
-                return (
-                  <div onClick={() => this.handleClickedIdea(idea.id)} key={idea.id}>
-                  <img height="400px" src={idea.image}/>
-                  <p className="legend">{idea.description.substring(0, 100)}...</p>
-                  </div>
-                )
-              })
-            })
-          }
-        </Carousel>
-      </Card>
-    <div className="pic" style={{backgroundImage: 'url("https://cdn-images-1.medium.com/max/2600/1*GROvc_YXMFG1jATKoOtBVw.jpeg")'}}>
+    <div className="pic" style={{backgroundImage: 'url("https://digitalready.co/sites/default/files/styles/1000x427/public/best-innovative-and-creative-facebook-ads-from-famous-brands.jpg?itok=UB_QOW2l")'}}>
+          <NewCarousel
+          users={this.state.users}
+          handleClickedIdea={this.handleClickedIdea}/>
+    </div>
+    <div className="pic" style={{backgroundImage: 'url("https://images.fastcompany.net/image/upload/w_1280,f_auto,q_auto,fl_lossy/fc/3045058-poster-p-1-4-strategies-for-introducing-new-ideas-at-work.jpg")'}}>
     <h1 className="about">ABOUT</h1>
         <h3 className="aboutWords">HAVE YOU EVER HAD A GOOD IDEA AND WANTED TO PITCH IT TO A COMPANY BUT DIDNT KNOW HOW?</h3>
 
         <h3 className="aboutWords">OR ARE YOU A COMPANY THAT NEEDS AN IDEA BUT CAN'T COME UP WITH ONE?</h3>
         <h3 className="aboutWords">WE CONNECT ADVERTISERS WITH COMPANIES.  YOU SUBMIT AN IDEA AND IF A COMPANY LIKES IT THEY OFFER YOU SOME COLD HARD CASH</h3>
         </div>
-    </Row>
     </div>
     </div>
   );

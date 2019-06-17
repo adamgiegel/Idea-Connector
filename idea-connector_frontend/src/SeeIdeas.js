@@ -49,43 +49,34 @@ class SeeIdeas extends Component {
   render(){
     return (
 <div>
-<div>
-<Card className='likedIdeas' style={{backgroundImage: this.state.backgroundImage}}>
-<h4 className='likedIdeasText'>COMPANIES THAT LIKE ONE OF YOUR IDEAS</h4>
-<h3 className='likedIdeasText'>Apple</h3>
-<h3 className='likedIdeasText'>Miller Lite</h3>
-</Card>
-</div>
 {this.state.selected ?
-<div>
-<Card className="idea2" onClick={this.handleSelectedClick}
-image="https://media.giphy.com/media/xTkcEEFmqMosEnKtzi/giphy.gif"
-description="GO TO MY IDEAS."
-/>
-</div>
-:
-<div>
-<SeeMyIdeas
-otherIdeas={this.props.ideas}
-currentUser={this.props.currentUser}
-handleClick={this.handleClick}
-foundIdea={this.props.foundIdea}
-addNewIdea={this.props.addNewIdea}
-deleteIdea={this.props.deleteIdea}
-ideas={this.props.ideas}
-selected={this.state.selected}
-handleYourIdeaBack={this.handleYourIdeaBack}
-/>
-</div>
-}
-{!this.state.clicked ?
-  <SelectedIdea
-  findIdea={this.state.findIdea}
-  goBack={this.goBack}
+
+  <div className="pic" style={{backgroundImage: 'url("https://digitalready.co/sites/default/files/styles/1000x427/public/best-innovative-and-creative-facebook-ads-from-famous-brands.jpg?itok=UB_QOW2l")'}}>
+  <h1 className="aboutWords" onClick={this.handleSelectedClick}>DO YOU WANT TO SEE YOUR IDEAS?</h1>
+  </div>
+  :
+  <div>
+  <SeeMyIdeas
+  otherIdeas={this.props.ideas}
+  currentUser={this.props.currentUser}
+  handleClick={this.handleClick}
+  foundIdea={this.props.foundIdea}
+  addNewIdea={this.props.addNewIdea}
   deleteIdea={this.props.deleteIdea}
   ideas={this.props.ideas}
-  currentUser={this.props.currentUser}/>
-: null}
+  selected={this.state.selected}
+  handleYourIdeaBack={this.handleYourIdeaBack}
+  />
+  </div>
+  }
+  {!this.state.clicked ?
+    <SelectedIdea
+    findIdea={this.state.findIdea}
+    goBack={this.goBack}
+    deleteIdea={this.props.deleteIdea}
+    ideas={this.props.ideas}
+    currentUser={this.props.currentUser}/>
+  : null}
 </div>
 )
 }

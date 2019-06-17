@@ -99,7 +99,6 @@ handleChangeForm = (e) => {
           <button onClick={this.props.handleFormBack} class='ui button'>Changed My Mind</button>
   </div>
 </form>
-
     );
   }
 }

@@ -23,12 +23,16 @@ handleClick = () => {
 
   render() {
     return (
-      <div>
-        <Card className="yourIdeaCard">
-          <div class="card-panel hoverable">
-            <h1 className="yourIdea">YOUR IDEA CONNECTION</h1>
+      <div className="App">
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+          <div>
+            <h1 className="yourIdeaConnection">YOUR IDEA CONNECTION</h1>
           </div>
-        </Card>
         <div>
           <div>
             <SeeIdeas
@@ -46,6 +50,9 @@ handleClick = () => {
                 foundIdea={this.props.foundIdea}
                 addNewIdea={this.props.addNewIdea}
                 deleteIdea={this.props.deleteIdea}/>
+            </div>
+            <div className="pic" style={{backgroundImage: 'url("https://images.fastcompany.net/image/upload/w_1280,f_auto,q_auto,fl_lossy/fc/3045058-poster-p-1-4-strategies-for-introducing-new-ideas-at-work.jpg")'}}>
+            <h1 className="aboutWords">HERE ARE SOME COMPANIES THAT LIKE YOUR WORK</h1>
             </div>
         </div>
       </div>

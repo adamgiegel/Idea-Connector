@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css?family=Karla');
 @import url('https://fonts.googleapis.com/css?family=Courgette');
 @import url('https://fonts.googleapis.com/css?family=Arapey');
+@import url('https://fonts.googleapis.com/css?family=Monoton');
 
 
 .App {
@@ -109,8 +110,6 @@
 
 .ui.form {
   position: absolute;
-  top: 10%;
-  left: 25%;
 }
 
 .carousel {
@@ -155,8 +154,7 @@
 
 
 .carousel {
-  height: 1200px;
-  background-color: #808080;
+  color: gray;
 }
 
 .myIdeasCard {
@@ -206,9 +204,22 @@
 }
 
 .aboutWords{
-  font-size: 3em;
+  font-size: 2em;
   font-family: 'Arapey';
-  color: black;
+  color: white;
+}
+
+.yourIdeaConnection{
+  font-size: 4em;
+  font-family: 'Arapey';
+  color: white;
+}
+
+.words{
+  font-size: 3em;
+  top: 10%;
+  font-family: 'Monoton';
+  color: white;
 }
 
 .likedIdeas {
@@ -309,4 +320,24 @@
  background-size: cover;
  background-repeat: no-repeat;
  height: 500px;
+}
+
+.nav-wrapper {
+  background-color: black;
+  position: fixed;
+  top: 0; /* Position the navbar at the top of the page */
+  width: 100%;
+}
+
+/* #footer {
+  background-color: black;
+  position: static;
+  bottom:0;
+  left:0;
+  width:100%
+} */
+
+.login {
+  left: 50%;
+  top: 50%;
 }
