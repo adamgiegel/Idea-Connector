@@ -18,7 +18,6 @@ class NewCarousel extends Component {
   }
 
 render () {
-  console.log("foundIdea", this.props.foundIdea)
   return (
     <div style={{ position: 'relative', width: '100%', height: 700 }}>
       <div onClick={() => this.setState({ open: true })}>

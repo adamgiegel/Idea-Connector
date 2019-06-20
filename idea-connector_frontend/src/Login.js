@@ -14,11 +14,15 @@ class Login extends Component {
     showSignUp: false,
     name: '',
     about: '',
+    users: [],
     ideas: [],
     loggedIn: false,
     currentUser: '',
+    open: true,
     username: '',
     password: '',
+    foundIdea: '',
+    newCarouselClick: true,
     about: '',
     backgroundImage: 'url("https://optinmonster.com/wp-content/uploads/2017/02/Blog-Post-Ideas-1.png")',
     value: '',
@@ -134,6 +138,21 @@ handleSignUpDropdown=(event)=> {
   }
   }
 
+  handleClickedIdea = (id) => {//find the specific idea from the passed in id located in the Carousel
+      const foundIdea = this.state.users.map(user => {
+      return user.ideas.find(idea => {
+        return idea.id === id
+      })
+    })
+    const findIdea = foundIdea.filter(idea => {
+      return idea
+    })
+    this.setState({
+      foundIdea: findIdea,
+      newCarouselClick: !this.state.newCarouselClick,
+    }, console.log("fidea", this.state.foundIdea))
+  }
+
   handleChange = (e) =>{
     if (e.target.name === 'name'){
       this.setState({
@@ -189,7 +208,16 @@ handleSignUpDropdown=(event)=> {
     })
   }
 
+  onOpenModal = () => {
+    this.setState({ open: true });
+  };
+
+  onCloseModal = () => {
+    this.setState({ open: false });
+  };
+
   render(){
+    console.log(this.state.foundIdea)
     return(
       <div>
       <div className="App">
@@ -199,11 +227,11 @@ handleSignUpDropdown=(event)=> {
               ideas={this.props.ideas}
               clickedIdea={this.props.clickedIdea}
               clickedIdeaBack={this.props.clickedIdeaBack}
-              handleClickedIdea={this.props.handleClickedIdea}
+              handleClickedIdea={this.handleClickedIdea}
               handleChangeSearch={this.props.handleChangeSearch}
               search={this.props.search}
-              foundIdea={this.props.foundIdea}
-              findIdea={this.props.foundIdea}
+              foundIdea={this.state.foundIdea}
+              newCarouselClick={this.state.newCarouselClick}
               ideaClick={this.props.ideaClick}
               goBack={this.props.goBack}
               likedIdea={this.props.likedIdea}
@@ -211,7 +239,10 @@ handleSignUpDropdown=(event)=> {
               users={this.state.users}
               companies={this.props.companies}
               currentUser={this.state.currentUser}
-              newCompany={this.props.newCompany}/>
+              newCompany={this.props.newCompany}
+              open={this.state.open}
+              onOpenModal={this.onOpenModal}
+              onCloseModal={this.onCloseModal}/>
             :
           <div className="App">
             <UserPage

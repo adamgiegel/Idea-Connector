@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-import 'semantic-ui-css/semantic.min.css';
-import { Card, Icon } from 'semantic-ui-react'
-import 'semantic-ui-css/semantic.min.css';
+import Modal from 'react-responsive-modal';
+import NewCarousel from './NewCarousel.js'
+import { Card, Button, Row, Col } from 'react-materialize'
 import SearchForm from './SearchForm'
 import EditCompanyForm from './EditCompanyForm'
 import ButtonExampleLabeled from './LikeButton'
@@ -10,7 +10,6 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 import Carousal from './Carousal'
 import SearchedIdeas from './SearchedIdeas'
-import NewCarousel from './NewCarousel.js'
 import IdeaList from './IdeaList'
 
 class CompanyPage extends Component {
@@ -50,6 +49,7 @@ handleAboutClick = () => {
 
 
   render() {
+    console.log("ideaf", this.props.foundIdea)
     return (
       <div className="needs">
       {this.state.aboutClick ?
@@ -100,12 +100,34 @@ handleAboutClick = () => {
       </div>
     }
     <div className="pic" style={{backgroundImage: 'url("https://digitalready.co/sites/default/files/styles/1000x427/public/best-innovative-and-creative-facebook-ads-from-famous-brands.jpg?itok=UB_QOW2l")'}}>
+    {this.state.newCarouselClick ?
     <NewCarousel
     clickedIdea={this.props.clickedIdea}
-    handleClickedIdea={this.props.handleClickedIdea}
-    users={this.props.users}
-    foundIdea={this.props.findIdea}
-    clickedIdeaBack={this.props.clickedIdeaBack}/>
+    foundIdea={this.props.foundIdea}
+    clickedIdeaBack={this.props.clickedIdeaBack}
+    users={this.state.users}
+    handleClickedIdea={this.handleClickedIdea}/>
+    :
+    <Modal open={this.state.open} center>
+    <div>
+    {
+      this.props.foundIdea.map(idea => {
+        return (
+          <div>
+          <div>
+          <iframe height="500px" width="750px" src={idea.video}/>
+          <p class="flow-text grey-text text-darken-2">{idea.description}</p>
+          </div>
+          <div>
+          <Button className="blue lighten-2" onClick={this.clickedIdeaBack}>GO BACK</Button>
+          </div>
+          </div>
+        )
+      })
+    }
+    </div>
+    </Modal>
+  }
     </div>
       </div>
     );
