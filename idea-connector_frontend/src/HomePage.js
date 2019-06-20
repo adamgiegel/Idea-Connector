@@ -7,6 +7,7 @@ import UserPage from './UserPage'
 import CompanyPage from './CompanyPage'
 import idea from './Ideas.jpg'
 import Navbar from './Navbar'
+import Modal from 'react-responsive-modal';
 import NewCarousel from './NewCarousel.js'
 import { BrowserRouter as Router, Redirect, Route } from "react-router-dom";
 import 'materialize-css';
@@ -18,6 +19,7 @@ class HomePage extends Component {
 
 state = {
     users: [],
+    loginPage: true,
     companies: [],
     ideas: [],
     selected: 'item1',
@@ -30,6 +32,8 @@ state = {
     clickedIdea: true,
     clicked2: true,
     shadup: true,
+    open: true,
+    newCarouselClick: true,
     backgroundImage: 'url("https://www.bloopanimation.com/wp-content/uploads/2013/07/finding-story-ideas-1103x575.jpg")',
     backgroundImage1: 'url("https://www.incimages.com/uploaded_files/image/1940x900/ideas-lightbulb-illo_1940x900_34046.jpg")',
   }
@@ -58,10 +62,18 @@ componentDidMount(){
   })
 }
 
+onOpenModal = () => {
+  this.setState({ open: true });
+};
+
+onCloseModal = () => {
+  this.setState({ open: false });
+};
+
 
 clickedIdeaBack = () => {//to set the state of clickedIdea to the opposite of what the state is...used in Carousel
   this.setState({
-    clickedIdea: !this.state.clickedIdea
+    newCarouselClick: !this.state.newCarouselClick
   })
 }
 
@@ -76,7 +88,7 @@ handleClickedIdea = (id) => {//find the specific idea from the passed in id loca
   })
   this.setState({
     foundIdea: findIdea,
-    clickedIdea: !this.state.clickedIdea,
+    newCarouselClick: !this.state.newCarouselClick,
   }, console.log("found Idea", this.state.foundIdea))
 }
 
@@ -172,18 +184,40 @@ aboutClick = () => {
 }
 
 render() {
-  console.log(this.state.foundIdea)
+  console.log("ideas", this.state.ideas)
   return (
     <div>
+    {this.state.loginPage ?
     <div>
     <div className="pic" style={{backgroundImage: this.state.backgroundImage}}>
     <br></br>
     <h1 className="ideaConnector">IDEA CONNECTOR</h1>
     </div>
     <div className="pic" style={{backgroundImage: 'url("https://digitalready.co/sites/default/files/styles/1000x427/public/best-innovative-and-creative-facebook-ads-from-famous-brands.jpg?itok=UB_QOW2l")'}}>
-          <NewCarousel
+          {this.state.newCarouselClick ? <NewCarousel
           users={this.state.users}
           handleClickedIdea={this.handleClickedIdea}/>
+          :
+          <Modal open={this.state.open} center>
+          <div>
+          {
+            this.state.foundIdea.map(idea => {
+              return (
+                <div>
+                <div>
+                <iframe height="500px" width="750px" src={idea.video}/>
+                <p class="flow-text grey-text text-darken-2">{idea.description}</p>
+                </div>
+                <div>
+                <Button className="blue lighten-2" onClick={this.clickedIdeaBack}>GO BACK</Button>
+                </div>
+                </div>
+              )
+            })
+          }
+          </div>
+          </Modal>
+        }
     </div>
     <div className="pic" style={{backgroundImage: 'url("https://images.fastcompany.net/image/upload/w_1280,f_auto,q_auto,fl_lossy/fc/3045058-poster-p-1-4-strategies-for-introducing-new-ideas-at-work.jpg")'}}>
     <h1 className="about">ABOUT</h1>
@@ -193,6 +227,14 @@ render() {
         <h3 className="aboutWords">WE CONNECT ADVERTISERS WITH COMPANIES.  YOU SUBMIT AN IDEA AND IF A COMPANY LIKES IT THEY OFFER YOU SOME COLD HARD CASH</h3>
         </div>
     </div>
+    : <Login
+    clicked2={this.state.clicked2}
+    deleteIdeaBack={this.deleteIdeaBack}
+    ideas={this.state.ideas}
+    currentUser={this.state.currentUser}
+    foundIdea={this.state.foundIdea}
+    addNewIdea={this.addNewIdea}
+    deleteIdea={this.deleteIdea}/>}
     </div>
   );
 }

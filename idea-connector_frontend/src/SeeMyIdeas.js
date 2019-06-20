@@ -8,15 +8,11 @@ import { Card, Button, Row, Col } from 'react-materialize'
 
 class SeeMyIdeas extends Component{
 
-  state = {
-    backgroundImage: 'url("https://media.giphy.com/media/xTkcEEFmqMosEnKtzi/giphy.gif")'
-  }
 
   render(){
     return(
-      <Card className="myIdeasCard">
-      <div style={{backgroundImage: this.state.backgroundImage}} class="row">
-  <div class="col s12 m6">
+      <Card className="App">
+      <div className="pic" style={{backgroundImage: 'url("https://digitalready.co/sites/default/files/styles/1000x427/public/best-innovative-and-creative-facebook-ads-from-famous-brands.jpg?itok=UB_QOW2l")'}}>
     <div>
           <h1 className="yourIdeas">YOUR IDEAS</h1>
     {
@@ -38,7 +34,6 @@ class SeeMyIdeas extends Component{
   }
   </div>
     </div>
-  </div>
 </div>
       </Card>
     )

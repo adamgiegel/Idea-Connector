@@ -57,7 +57,6 @@ class SeeIdeas extends Component {
   :
   <div>
   <SeeMyIdeas
-  otherIdeas={this.props.ideas}
   currentUser={this.props.currentUser}
   handleClick={this.handleClick}
   foundIdea={this.props.foundIdea}

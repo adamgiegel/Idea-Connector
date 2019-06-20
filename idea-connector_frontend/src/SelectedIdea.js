@@ -30,7 +30,7 @@ class SelectedIdea extends Component{
 
   render(){
     return(
-      <Card className="myIdeasCard2">
+      <Card className="App">
       <Button as='div' labelPosition='right'>
         <Button icon>
           <Icon name='heart' />

@@ -14,6 +14,7 @@ class Login extends Component {
     showSignUp: false,
     name: '',
     about: '',
+    ideas: [],
     loggedIn: false,
     currentUser: '',
     username: '',
@@ -24,6 +25,16 @@ class Login extends Component {
     clicked: true,
     shadup: true
   }
+
+componentDidMount(){
+  fetch('http://localhost:3000/api/v1/ideas')
+  .then(response => response.json())
+  .then(idea => {
+    this.setState({
+      ideas: idea
+    })
+  })
+}
 
   fetchSignUp = (e) => {
     e.preventDefault()
@@ -197,13 +208,13 @@ handleSignUpDropdown=(event)=> {
             :
           <div className="App">
             <UserPage
-              clicked2={this.state.clicked2}
-              deleteIdeaBack={this.deleteIdeaBack}
+              clicked2={this.props.clicked2}
+              deleteIdeaBack={this.props.deleteIdeaBack}
               ideas={this.state.ideas}
-              currentUser={this.state.currentUser}
-              foundIdea={this.state.foundIdea}
-              addNewIdea={this.addNewIdea}
-              deleteIdea={this.deleteIdea}/>
+              foundIdea={this.props.foundIdea}
+              addNewIdea={this.props.addNewIdea}
+              deleteIdea={this.props.deleteIdea}
+              currentUser={this.state.currentUser}/>
           </div>
         :
         <div>
