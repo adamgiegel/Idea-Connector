@@ -194,7 +194,8 @@ render() {
     <h1 className="ideaConnector">IDEA CONNECTOR</h1>
     </div>
     <div className="pic" style={{backgroundImage: 'url("https://digitalready.co/sites/default/files/styles/1000x427/public/best-innovative-and-creative-facebook-ads-from-famous-brands.jpg?itok=UB_QOW2l")'}}>
-          {this.state.newCarouselClick ? <NewCarousel
+          {this.state.newCarouselClick ?
+          <NewCarousel
           users={this.state.users}
           handleClickedIdea={this.handleClickedIdea}/>
           :
@@ -228,9 +229,23 @@ render() {
         </div>
     </div>
     : <Login
+    ideas={this.state.ideas}
+    clickedIdea={this.state.clickedIdea}
+    clickedIdeaBack={this.clickedIdeaBack}
+    handleClickedIdea={this.handleClickedIdea}
+    handleChangeSearch={this.handleChangeSearch}
+    search={this.state.search}
+    foundIdea={this.foundIdea}
+    findIdea={this.state.foundIdea}
+    ideaClick={this.state.ideaClick}
+    goBack={this.goBack}
+    likedIdea={this.state.likedIdea}
+    updateIdeas={this.updateIdeas}
+    users={this.state.users}
+    companies={this.state.companies}
+    newCompany={this.newCompany}
     clicked2={this.state.clicked2}
     deleteIdeaBack={this.deleteIdeaBack}
-    ideas={this.state.ideas}
     currentUser={this.state.currentUser}
     foundIdea={this.state.foundIdea}
     addNewIdea={this.addNewIdea}

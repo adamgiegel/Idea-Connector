@@ -10,6 +10,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 import Carousal from './Carousal'
 import SearchedIdeas from './SearchedIdeas'
+import NewCarousel from './NewCarousel.js'
 import IdeaList from './IdeaList'
 
 class CompanyPage extends Component {
@@ -65,20 +66,8 @@ handleAboutClick = () => {
       currentUser={this.props.currentUser}/>
       </div>
     }
-    <Carousal
-    clickedIdea={this.props.clickedIdea}
-    handleClickedIdea={this.props.handleClickedIdea}
-    users={this.props.users}
-    foundIdea={this.props.findIdea}
-    clickedIdeaBack={this.props.clickedIdeaBack}/>
-
-
     {this.state.needIdeaClick ?
-      <div className="needs">
-      <Card className="needIdea" onClick={this.handleNeedIdea}
-      image='https://media.giphy.com/media/RLUPuPHz1uqd5rJEFa/giphy.gif'
-      description="NEED AN IDEA?"
-      />
+      <div className="pic" onClick={this.handleNeedIdea} style={{backgroundImage: 'url("https://digitalready.co/sites/default/files/styles/1000x427/public/best-innovative-and-creative-facebook-ads-from-famous-brands.jpg?itok=UB_QOW2l")'}}>
       </div>
       :
       <div className="searchedIdeas">
@@ -110,6 +99,14 @@ handleAboutClick = () => {
       </div>
       </div>
     }
+    <div className="pic" style={{backgroundImage: 'url("https://digitalready.co/sites/default/files/styles/1000x427/public/best-innovative-and-creative-facebook-ads-from-famous-brands.jpg?itok=UB_QOW2l")'}}>
+    <NewCarousel
+    clickedIdea={this.props.clickedIdea}
+    handleClickedIdea={this.props.handleClickedIdea}
+    users={this.props.users}
+    foundIdea={this.props.findIdea}
+    clickedIdeaBack={this.props.clickedIdeaBack}/>
+    </div>
       </div>
     );
   }

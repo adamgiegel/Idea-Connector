@@ -34,6 +34,13 @@ componentDidMount(){
       ideas: idea
     })
   })
+  fetch('http://localhost:3000/api/v1/users')
+  .then(response => response.json())
+  .then(user => {
+    this.setState({
+      users: user
+    })
+  })
 }
 
   fetchSignUp = (e) => {
@@ -189,22 +196,22 @@ handleSignUpDropdown=(event)=> {
         {this.state.loggedIn ?
           this.state.value === "company" ?
             <CompanyPage
-              ideas={this.state.ideas}
-              clickedIdea={this.state.clickedIdea}
-              clickedIdeaBack={this.clickedIdeaBack}
-              handleClickedIdea={this.handleClickedIdea}
-              handleChangeSearch={this.handleChangeSearch}
-              search={this.state.search}
-              foundIdea={this.foundIdea}
-              findIdea={this.state.foundIdea}
-              ideaClick={this.state.ideaClick}
-              goBack={this.goBack}
-              likedIdea={this.state.likedIdea}
-              updateIdeas={this.updateIdeas}
+              ideas={this.props.ideas}
+              clickedIdea={this.props.clickedIdea}
+              clickedIdeaBack={this.props.clickedIdeaBack}
+              handleClickedIdea={this.props.handleClickedIdea}
+              handleChangeSearch={this.props.handleChangeSearch}
+              search={this.props.search}
+              foundIdea={this.props.foundIdea}
+              findIdea={this.props.foundIdea}
+              ideaClick={this.props.ideaClick}
+              goBack={this.props.goBack}
+              likedIdea={this.props.likedIdea}
+              updateIdeas={this.props.updateIdeas}
               users={this.state.users}
-              companies={this.state.companies}
+              companies={this.props.companies}
               currentUser={this.state.currentUser}
-              newCompany={this.newCompany}/>
+              newCompany={this.props.newCompany}/>
             :
           <div className="App">
             <UserPage
