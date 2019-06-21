@@ -10,219 +10,15 @@ import Navbar from './Navbar'
 import { Carousel } from 'react-responsive-carousel';
 
 class Login extends Component {
-  state = {
-    showSignUp: false,
-    name: '',
-    about: '',
-    users: [],
-    ideas: [],
-    loggedIn: false,
-    currentUser: '',
-    open: true,
-    username: '',
-    password: '',
-    foundIdea: '',
-    newCarouselClick: true,
-    about: '',
-    backgroundImage: 'url("https://optinmonster.com/wp-content/uploads/2017/02/Blog-Post-Ideas-1.png")',
-    value: '',
-    clicked: true,
-    shadup: true
-  }
 
-componentDidMount(){
-  fetch('http://localhost:3000/api/v1/ideas')
-  .then(response => response.json())
-  .then(idea => {
-    this.setState({
-      ideas: idea
-    })
-  })
-  fetch('http://localhost:3000/api/v1/users')
-  .then(response => response.json())
-  .then(user => {
-    this.setState({
-      users: user
-    })
-  })
-}
-
-  fetchSignUp = (e) => {
-    e.preventDefault()
-    if(this.state.value === "user"){
-    fetch('http://localhost:3000/api/v1/users', {
-      method: "POST",
-      headers:{
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-      },
-      body:JSON.stringify({
-        "name": this.state.name,
-        "about": this.state.about,
-        "username": this.state.username,
-        "password": this.state.password,
-      })
-    })
-    .then(window.location.href = 'http://localhost:3001/dashboard')
-  } else if (this.state.value === "company"){
-    fetch('http://localhost:3000/api/v1/companies', {
-      method: "POST",
-      headers:{
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-      },
-      body:JSON.stringify({
-        "name": this.state.name,
-        "about": this.state.about,
-        "username": this.state.username,
-        "password": this.state.password,
-      })
-    })
-    .then(window.location.href = 'http://localhost:3001/dashboard')
-  }
-}
-
-handleSignUpDropdown=(event)=> {
-    this.setState({value:event.target.value})
-  }
-
-  fetchUser = (username, password) => {
-    if (this.state.value === 'user'){
-    fetch('http://localhost:3000/api/v1/users/login', {
-    method: "POST",
-    headers:{
-      "Content-Type": "application/json",
-      "Accept": "application/json"
-    },
-    body:JSON.stringify({
-      "username": username,
-      "password": password,
-    }),
-  })
-  .then(res => res.json())
-  .then(res => {
-    if(res.error){
-      alert(res.error)
-    } else {
-      console.log(this.state.loggedIn)
-      this.setState({
-        currentUser: res,
-        loggedIn: true,
-      })
-      console.log(this.state.loggedIn)
-    }
-   })
-  } else if (this.state.value === 'company') {
-    fetch('http://localhost:3000/api/v1/login', {
-      method: "POST",
-      headers:{
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-      },
-      body:JSON.stringify({
-        "username": username,
-        "password": password,
-      }),
-    })
-    .then(res => res.json())
-    .then(res => {
-      if(res.error){
-        alert(res.error)
-      } else {
-        this.setState({
-          currentUser: res,
-          loggedIn: true,
-        })
-      }
-     })
-  }
-  }
-
-  handleClickedIdea = (id) => {//find the specific idea from the passed in id located in the Carousel
-      const foundIdea = this.state.users.map(user => {
-      return user.ideas.find(idea => {
-        return idea.id === id
-      })
-    })
-    const findIdea = foundIdea.filter(idea => {
-      return idea
-    })
-    this.setState({
-      foundIdea: findIdea,
-      newCarouselClick: !this.state.newCarouselClick,
-    }, console.log("fidea", this.state.foundIdea))
-  }
-
-  handleChange = (e) =>{
-    if (e.target.name === 'name'){
-      this.setState({
-        name: e.target.value
-      })
-    } else if (e.target.name === 'about'){
-      this.setState({
-        about: e.target.value
-      })
-    } else if (e.target.name === 'username'){
-      this.setState({
-        username: e.target.value
-      })
-    } else if (e.target.name === 'password'){
-      this.setState({
-        password: e.target.value
-      })
-    }
-  }
-
-  handleSignUpButton = () => {
-    this.setState({
-      name: '',
-      username: '',
-      password: '',
-      about: '',
-      showSignUp: !(this.state.showSignUp)
-    })
-  }
-
-  handleLogin =(e, username, password) => {//handles the login event and receives username and password from Login.js
-    e.preventDefault()
-    console.log(username, password)
-    this.fetchUser(username, password)
-  }
-
-  handleLogout = () => {//sets the state of currentUser back to an empty string and loggedIn back to false
-    this.setState({
-      currentUser: '',
-      loggedIn: false
-    })
-  }
-
-  handleChangeDropdown=(event)=> {//handles the dropdown change in state
-    console.log("event", event.target.value)
-      this.setState({value:event.target.value})
-    }
-
-
-  aboutClick = () => {
-    this.setState({
-      shadup: !this.state.shadup
-    })
-  }
-
-  onOpenModal = () => {
-    this.setState({ open: true });
-  };
-
-  onCloseModal = () => {
-    this.setState({ open: false });
-  };
 
   render(){
-    console.log(this.state.foundIdea)
+    console.log("loggedIn", this.props.showSignUp)
     return(
       <div>
       <div className="App">
-        {this.state.loggedIn ?
-          this.state.value === "company" ?
+        {this.props.loggedIn ?
+          this.props.value === "company" ?
             <CompanyPage
               ideas={this.props.ideas}
               clickedIdea={this.props.clickedIdea}
@@ -256,7 +52,7 @@ handleSignUpDropdown=(event)=> {
           </div>
         :
         <div>
-        {this.state.showSignUp === false ?
+        {this.props.showSignUp === false ?
           <div className="pic" style={{backgroundImage: 'url("https://digitalready.co/sites/default/files/styles/1000x427/public/best-innovative-and-creative-facebook-ads-from-famous-brands.jpg?itok=UB_QOW2l")'}}>
           <br></br>
           <br></br>
@@ -267,10 +63,10 @@ handleSignUpDropdown=(event)=> {
         <div class="col s6">
           <div class="login card small">
           <Card>
-            <form onSubmit={(e) => this.handleLogin(e, this.state.username, this.state.password)}>
+            <form onSubmit={(e) => this.props.handleLogin(e, this.props.username, this.props.password)}>
             <div>
             <label></label>
-              <select value={this.state.value} onChange={(event) => this.handleChangeDropdown(event)}class="browser-default">
+              <select value={this.props.value} onChange={(event) => this.props.handleChangeDropdown(event)}class="browser-default">
                 <option >ARE YOU A</option>
                 <option value="user">USER</option>
                 <option value="company">COMPANY</option>
@@ -278,16 +74,16 @@ handleSignUpDropdown=(event)=> {
             </div>
               <label>
                 Username:
-                <input value={this.state.username} onChange={(e) => this.handleChange(e)} type="text" name="username" placeholder="user your username"/>
+                <input value={this.props.username} onChange={(e) => this.props.handleChange(e)} type="text" name="username" placeholder="user your username"/>
               </label>
               <label>
                 Password:
-                <input value={this.state.password} onChange={(e) => this.handleChange(e)} type="password" name="password"/>
+                <input value={this.props.password} onChange={(e) => this.props.handleChange(e)} type="password" name="password"/>
               </label>
               <Button className="blue lighten-2">Submit</Button>
               </form>
               <br/>
-              <Button className="blue lighten-2" onClick={this.handleSignUpButton}>SignUp</Button>
+              <Button className="blue lighten-2" onClick={this.props.handleSignUpButton}>SignUp</Button>
               </Card>
           </div>
           </div>
@@ -300,10 +96,10 @@ handleSignUpDropdown=(event)=> {
           </div>
           :
           <Card>
-            <form onSubmit={(e) => this.fetchSignUp(e)}>
+            <form onSubmit={(e) => this.props.fetchSignUp(e)}>
             <div>
             <label></label>
-              <select value={this.state.value} onChange={this.handleSignUpDropdown}class="browser-default">
+              <select value={this.props.value} onChange={this.props.handleSignUpDropdown}class="browser-default">
                 <option >ARE YOU A</option>
                 <option value="user">USER</option>
                 <option value="company">COMPANY</option>
@@ -311,23 +107,23 @@ handleSignUpDropdown=(event)=> {
             </div>
             <label>
               Name or Company Name:
-              <input value={this.state.name} onChange={(e) => this.handleChange(e)} type="text" name="name" placeholder="Name please"/>
+              <input value={this.props.name} onChange={(e) => this.props.handleChange(e)} type="text" name="name" placeholder="Name please"/>
             </label>
             <label>
               About:
-              <input value={this.state.about} onChange={(e) => this.handleChange(e)} type="text" name="about" placeholder="Tell us about yourself or your company"/>
+              <input value={this.props.about} onChange={(e) => this.props.handleChange(e)} type="text" name="about" placeholder="Tell us about yourself or your company"/>
             </label>
               <label>
                 Username:
-                <input value={this.state.username} onChange={(e) => this.handleChange(e)} type="text" name="username" placeholder="What should we call you?"/>
+                <input value={this.props.username} onChange={(e) => this.props.handleChange(e)} type="text" name="username" placeholder="What should we call you?"/>
               </label>
               <label>
                 Password:
-                <input value={this.state.password} onChange={(e) => this.handleChange(e)} type="password" name="password" placeholder='Make it secret.'/>
+                <input value={this.props.password} onChange={(e) => this.props.handleChange(e)} type="password" name="password" placeholder='Make it secret.'/>
               </label>
               <Button className="blue lighten-2">Submit</Button>
             </form>
-            <Button  className="blue lighten-2" onClick={this.handleSignUpButton}>Login Page</Button>
+            <Button  className="blue lighten-2" onClick={this.props.handleSignUpButton}>Login Page</Button>
             <br/>
           </Card>
         }

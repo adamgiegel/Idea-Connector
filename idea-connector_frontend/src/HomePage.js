@@ -17,192 +17,25 @@ import { Card, Button, Row, Col } from 'react-materialize'
 
 class HomePage extends Component {
 
-state = {
-    users: [],
-    loginPage: true,
-    companies: [],
-    ideas: [],
-    selected: 'item1',
-    foundIdea: '',
-    loggedIn: false,
-    currentUser: '',
-    value: '',
-    ideaClick: '',
-    likedIdea: '',
-    clickedIdea: true,
-    clicked2: true,
-    shadup: true,
-    open: true,
-    newCarouselClick: true,
-    backgroundImage: 'url("https://www.bloopanimation.com/wp-content/uploads/2013/07/finding-story-ideas-1103x575.jpg")',
-    backgroundImage1: 'url("https://www.incimages.com/uploaded_files/image/1940x900/ideas-lightbulb-illo_1940x900_34046.jpg")',
-  }
-
-componentDidMount(){
-  fetch('http://localhost:3000/api/v1/users')
-  .then(response => response.json())
-  .then(user => {
-    this.setState({
-      users: user
-    })
-  })
-  fetch('http://localhost:3000/api/v1/ideas')
-  .then(response => response.json())
-  .then(idea => {
-    this.setState({
-      ideas: idea
-    })
-  })
-  fetch('http://localhost:3000/api/v1/companies')
-  .then(response => response.json())
-  .then(company => {
-    this.setState({
-      companies: company
-    })
-  })
-}
-
-onOpenModal = () => {
-  this.setState({ open: true });
-};
-
-onCloseModal = () => {
-  this.setState({ open: false });
-};
-
-
-clickedIdeaBack = () => {//to set the state of clickedIdea to the opposite of what the state is...used in Carousel
-  this.setState({
-    newCarouselClick: !this.state.newCarouselClick
-  })
-}
-
-handleClickedIdea = (id) => {//find the specific idea from the passed in id located in the Carousel
-  const foundIdea = this.state.users.map(user => {
-    return user.ideas.find(idea => {
-      return idea.id === id
-    })
-  })
-  const findIdea = foundIdea.filter(idea => {
-    return idea
-  })
-  this.setState({
-    foundIdea: findIdea,
-    newCarouselClick: !this.state.newCarouselClick,
-  }, console.log("found Idea", this.state.foundIdea))
-}
-
-updateIdeas = (id) => {//is a Patch to update the num_likes on the backend
-fetch(`http://localhost:3000/api/v1/likes`, {
-  method: "POST",
-  headers:{
-    "Content-Type": "application/json",
-    "Accept": "application/json"
-  },
-  body: JSON.stringify({idea_id: id, company_id: this.state.currentUser.id}),
-})
-.then(res => res.json())
-.then(like => {
-  console.log("like", like)
-  this.setState({
-    foundIdea: [...this.state.ideas, like]
-  }, () => console.log(this.state.foundIdea))
-})
-}
-
-deleteIdea = (id) => {//Delete method to delete an idea
-  fetch(`http://localhost:3000/api/v1/ideas/${id}`, {method: "DELETE"})
-  const filterIdeas = this.state.ideas.filter(idea => {//find the idea needed and filter it from all ideas
-    return idea.id !== id
-  })
-  this.setState({
-    ideas: filterIdeas,//set the state of ideas
-    clicked2: !this.state.clicked2
-  })
-}
-
-deleteIdeaBack = () => {
-  this.setState({
-    clicked2: !this.state.clicked2
-  })
-}
-
-addNewIdea = (idea) => {//function to change state with the new Idea passed up from UserForm.js
-  this.setState(prevState => {
-    return {
-      ideas: [...prevState.ideas, idea],
-      currentUser: {...prevState.currentUser, ideas: [...prevState.currentUser.ideas, idea]}
-    }
-  })
-}
-
-goBack = () => {
-  this.setState({
-    ideaClick: !this.state.ideaClick
-  })
-}
-
-
-
-
-newCompany = (id, name, about, email, contact) => {//used to update the state for the company information from EditCompanyForm.js
-    let companyCopy = [...this.state.companies]
-    const companyIdx = companyCopy.findIndex(company => company.id === id)
-    const company = {...companyCopy[companyIdx]}
-    company.name = name
-    company.about = about
-    company.email = email
-    company.contact = contact
-    companyCopy[companyIdx] = company
-    this.setState({
-      companies: companyCopy,
-    })
-}
-
-
-foundIdea = (id) => {//finds the selected idea when clicked on by the company in the list of ideas
-  const foundIdea = this.state.users.map(user => {
-    return user.ideas.find(idea => {
-      return idea.id === id
-    })
-  })
-  const findIdea = foundIdea.filter(idea => {
-    return idea
-  })
-  this.setState({
-    foundIdea: findIdea,
-    ideaClick: !this.state.ideaClick,
-  })
-}
-
-
-
-aboutClick = () => {
-  this.setState({
-    shadup: !this.state.shadup
-  })
-}
 
 render() {
-  console.log("ideas", this.state.ideas)
   return (
     <div>
-    {this.state.loginPage ?
     <div>
-    <div className="pic" style={{backgroundImage: this.state.backgroundImage}}>
+    <div className="pic" style={{backgroundImage: 'url("https://www.bloopanimation.com/wp-content/uploads/2013/07/finding-story-ideas-1103x575.jpg")'}}>
     <br></br>
     <h1 className="ideaConnector">IDEA CONNECTOR</h1>
     </div>
     <div className="pic" style={{backgroundImage: 'url("https://digitalready.co/sites/default/files/styles/1000x427/public/best-innovative-and-creative-facebook-ads-from-famous-brands.jpg?itok=UB_QOW2l")'}}>
-          {this.state.newCarouselClick ?
+          {this.props.newCarouselClick ?
           <NewCarousel
-          users={this.state.users}
-          handleClickedIdea={this.handleClickedIdea}/>
+          users={this.props.users}
+          handleClickedIdea={this.props.handleClickedIdea}/>
           :
-          <Modal open={this.state.open} center>
+          <Modal open={this.props.open} center>
           <div>
           {
-            this.state.foundIdea.map(idea => {
+            this.props.foundIdea.map(idea => {
               return (
                 <div>
                 <div>
@@ -210,7 +43,7 @@ render() {
                 <p class="flow-text grey-text text-darken-2">{idea.description}</p>
                 </div>
                 <div>
-                <Button className="blue lighten-2" onClick={this.clickedIdeaBack}>GO BACK</Button>
+                <Button className="blue lighten-2" onClick={this.props.clickedIdeaBack}>GO BACK</Button>
                 </div>
                 </div>
               )
@@ -228,28 +61,6 @@ render() {
         <h3 className="aboutWords">WE CONNECT ADVERTISERS WITH COMPANIES.  YOU SUBMIT AN IDEA AND IF A COMPANY LIKES IT THEY OFFER YOU SOME COLD HARD CASH</h3>
         </div>
     </div>
-    : <Login
-    ideas={this.state.ideas}
-    clickedIdea={this.state.clickedIdea}
-    clickedIdeaBack={this.clickedIdeaBack}
-    handleClickedIdea={this.handleClickedIdea}
-    handleChangeSearch={this.handleChangeSearch}
-    search={this.state.search}
-    foundIdea={this.foundIdea}
-    findIdea={this.state.foundIdea}
-    ideaClick={this.state.ideaClick}
-    goBack={this.goBack}
-    likedIdea={this.state.likedIdea}
-    updateIdeas={this.updateIdeas}
-    users={this.state.users}
-    companies={this.state.companies}
-    newCompany={this.newCompany}
-    clicked2={this.state.clicked2}
-    deleteIdeaBack={this.deleteIdeaBack}
-    currentUser={this.state.currentUser}
-    foundIdea={this.state.foundIdea}
-    addNewIdea={this.addNewIdea}
-    deleteIdea={this.deleteIdea}/>}
     </div>
   );
 }
