@@ -36,7 +36,7 @@ class App extends Component {
       about: '',
       value: '',
       clicked: true,
-      shadup: true
+      aboutClicked: true
     }
 
   componentDidMount(){
@@ -98,9 +98,9 @@ class App extends Component {
   }
 }
 
-handleSignUpDropdown=(event)=> {
-    this.setState({value:event.target.value})
-  }
+  handleSignUpDropdown=(event)=> {
+      this.setState({value:event.target.value})
+    }
 
   fetchUser = (username, password) => {
     if (this.state.value === 'user'){
@@ -186,7 +186,6 @@ handleSignUpDropdown=(event)=> {
 
   handleLogin =(e, username, password) => {//handles the login event and receives username and password from Login.js
     e.preventDefault()
-    console.log(username, password)
     this.fetchUser(username, password)
   }
 
@@ -198,14 +197,13 @@ handleSignUpDropdown=(event)=> {
   }
 
   handleChangeDropdown=(event)=> {//handles the dropdown change in state
-    console.log("event", event.target.value)
       this.setState({value:event.target.value})
     }
 
 
   aboutClick = () => {
     this.setState({
-      shadup: !this.state.shadup
+      aboutClicked: !this.state.aboutClicked
     })
   }
 
@@ -225,23 +223,50 @@ handleSignUpDropdown=(event)=> {
     })
   }
 
-  updateIdeas = (id) => {//is a Patch to update the num_likes on the backend
-  fetch(`http://localhost:3000/api/v1/likes`, {
-    method: "POST",
-    headers:{
-      "Content-Type": "application/json",
-      "Accept": "application/json"
-    },
-    body: JSON.stringify({idea_id: id, company_id: this.state.currentUser.id}),
+  // updateIdeas = (id) => {//is a Patch to update the num_likes on the backend
+  // fetch(`http://localhost:3000/api/v1/likes`, {
+  //   method: "POST",
+  //   headers:{
+  //     "Content-Type": "application/json",
+  //     "Accept": "application/json"
+  //   },
+  //   body: JSON.stringify({idea_id: id, company_id: this.state.currentUser.id}),
+  // })
+  // .then(res => res.json())
+  // .then(like => {
+  //   console.log("like", like)
+  //   this.setState({
+  //     foundIdea: [...this.state.ideas, like]
+  //   }, () => console.log(this.state.foundIdea))
+  // })
+  // }
+
+  updateIdeas = (id) => {
+  const foundIdea = this.state.users.map(user => {
+    return user.ideas.find(idea => {
+      return idea.id === id
+    })
   })
-  .then(res => res.json())
-  .then(like => {
-    console.log("like", like)
-    this.setState({
-      foundIdea: [...this.state.ideas, like]
-    }, () => console.log(this.state.foundIdea))
+  const findIdea = foundIdea.filter(idea => {
+    return idea
   })
-  }
+  const mapIdea = findIdea[0]
+  const data = mapIdea
+fetch(`http://localhost:3000/api/v1/likes`, {
+  method: "POST",
+  headers:{
+    "Content-Type": "application/json",
+    "Accept": "application/json"
+  },
+  body: JSON.stringify({idea_id: id, company_id: this.state.currentUser.id}),
+})
+.then(res => res.json())
+.then(like => {
+  this.setState({
+    likedIdea: like
+  })
+})
+}
 
   deleteIdea = (id) => {//Delete method to delete an idea
     fetch(`http://localhost:3000/api/v1/ideas/${id}`, {method: "DELETE"})
@@ -274,9 +299,6 @@ handleSignUpDropdown=(event)=> {
       ideaClick: !this.state.ideaClick
     })
   }
-
-
-
 
   newCompany = (id, name, about, email, contact) => {//used to update the state for the company information from EditCompanyForm.js
       let companyCopy = [...this.state.companies]
@@ -328,7 +350,7 @@ handleSignUpDropdown=(event)=> {
     this.setState({
       foundIdea: findIdea,
       newCarouselClick: !this.state.newCarouselClick,
-    }, console.log("found Idea", this.state.foundIdea))
+    })
   }
 
   render() {
@@ -336,59 +358,83 @@ handleSignUpDropdown=(event)=> {
       <div className="App">
         <Router>
           <div>
-          <Route exact path="/" render={(routeProps) => (<HomePage {...routeProps}
-            users={this.state.users}
-            loginPage={this.state.loginPage}
-            newCarouselClick={this.state.newCarouselClick}
-            handleClickedIdea={this.handleClickedIdea}
-            open={this.state.open}
-            onOpenModal={this.onOpenModal}
-            onCloseModal={this.onCloseModal}
-            foundIdea={this.state.foundIdea}
-            clickedIdeaBack={this.clickedIdeaBack}
-            />)}/>
-          <Route path="/login" render={(routeProps) => (<Login {...routeProps}
-            users={this.state.users}
-            loggedIn={this.state.loggedIn}
-            value={this.state.value}
-            showSignUp={this.state.showSignUp}
-            handleLogin={this.handleLogin}
-            username={this.state.username}
-            password={this.state.password}
-            value={this.state.value}
-            handleChangeDropdown={this.handleChangeDropdown}
-            handleChange={this.handleChange}
-            handleSignUpButton={this.handleSignUpButton}
-            fetchSignUp={this.fetchSignUp}
-            handleSignUpDropdown={this.handleSignUpDropdown}
-            about={this.state.about}/>)}
-            />
+            <Route exact path="/" render={(routeProps) => (<HomePage {...routeProps}
+              users={this.state.users}
+              loginPage={this.state.loginPage}
+              newCarouselClick={this.state.newCarouselClick}
+              handleClickedIdea={this.handleClickedIdea}
+              open={this.state.open}
+              onOpenModal={this.onOpenModal}
+              onCloseModal={this.onCloseModal}
+              foundIdea={this.state.foundIdea}
+              clickedIdeaBack={this.clickedIdeaBack}
+              />)}/>
+            <Route path="/login" render={(routeProps) => (<Login {...routeProps}
+              users={this.state.users}
+              loggedIn={this.state.loggedIn}
+              value={this.state.value}
+              showSignUp={this.state.showSignUp}
+              handleLogin={this.handleLogin}
+              username={this.state.username}
+              password={this.state.password}
+              value={this.state.value}
+              handleChangeDropdown={this.handleChangeDropdown}
+              handleChange={this.handleChange}
+              handleSignUpButton={this.handleSignUpButton}
+              fetchSignUp={this.fetchSignUp}
+              handleSignUpDropdown={this.handleSignUpDropdown}
+              about={this.state.about}
+              ideas={this.state.ideas}
+              clickedIdea={this.clickedIdea}
+              clickedIdeaBack={this.clickedIdeaBack}
+              handleClickedIdea={this.handleClickedIdea}
+              handleChangeSearch={this.handleChangeSearch}
+              search={this.state.search}
+              foundIdea={this.state.foundIdea}
+              newCarouselClick={this.state.newCarouselClick}
+              ideaClick={this.ideaClick}
+              goBack={this.goBack}
+              likedIdea={this.state.likedIdea}
+              updateIdeas={this.updateIdeas}
+              users={this.state.users}
+              companies={this.state.companies}
+              currentUser={this.state.currentUser}
+              newCompany={this.newCompany}
+              open={this.state.open}
+              onOpenModal={this.onOpenModal}
+              onCloseModal={this.onCloseModal}
+              clicked2={this.state.clicked2}
+              deleteIdeaBack={this.deleteIdeaBack}
+              addNewIdea={this.addNewIdea}
+              deleteIdea={this.deleteIdea}
+              />)}
+              />
           <nav class="nav-wrapper">
             <div>
             <SocialIcon url="https://www.linkedin.com/in/adam-giegel-ba5579a6/" style={{ height: 40, width: 40 }} bgColor="white" target="_blank"/>{' '}
             <SocialIcon url="https://medium.com/@adamgiegel" style={{ height: 40, width: 40 }} network="medium" bgColor="white" target="_blank"/>{'  '}
             <SocialIcon url="https://github.com/adamgiegel" style={{ height: 40, width: 40 }} network="github" bgColor="white" target="_blank"/>{'  '}
               <ul id="nav-mobile" class="right hide-on-med-and-down">
-              <ul>
-                <li>
-                  <Link class="intro" to="/">HOME</Link>
-                </li>
-                <li>
-                  <Link class="intro" to="/about">ABOUT</Link>
-                </li>
-                <li>
-                  <Link class="intro" to="/login">LOGIN</Link>
-                </li>
-                <li>
-                  <Link class="intro" to="/contact">CONTACT ME</Link>
-                </li>
-              </ul>
+                <ul>
+                  <li>
+                    <Link class="intro" to="/">HOME</Link>
+                  </li>
+                  <li>
+                    <Link class="intro" to="/about">ABOUT</Link>
+                  </li>
+                  <li>
+                    <Link class="intro" to="/login">LOGIN</Link>
+                  </li>
+                  <li>
+                    <Link class="intro" to="/contact">CONTACT ME</Link>
+                  </li>
+                </ul>
               </ul>
             </div>
           </nav>
-          </div>
-        </Router>
-      </div>
+        </div>
+      </Router>
+    </div>
     );
   }
 }

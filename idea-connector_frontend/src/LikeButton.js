@@ -5,6 +5,7 @@ class ButtonExampleLabeled extends Component{
 
 
   render(){
+    console.log("id", this.props.id)
     return (
       <div>
         <Button onClick={() => this.props.updateIdeas(this.props.id)} as='div' labelPosition='right'>

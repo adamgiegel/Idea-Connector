@@ -13,7 +13,6 @@ class Login extends Component {
 
 
   render(){
-    console.log("loggedIn", this.props.showSignUp)
     return(
       <div>
       <div className="App">
@@ -23,32 +22,32 @@ class Login extends Component {
               ideas={this.props.ideas}
               clickedIdea={this.props.clickedIdea}
               clickedIdeaBack={this.props.clickedIdeaBack}
-              handleClickedIdea={this.handleClickedIdea}
+              handleClickedIdea={this.props.handleClickedIdea}
               handleChangeSearch={this.props.handleChangeSearch}
               search={this.props.search}
-              foundIdea={this.state.foundIdea}
-              newCarouselClick={this.state.newCarouselClick}
+              foundIdea={this.props.foundIdea}
+              newCarouselClick={this.props.newCarouselClick}
               ideaClick={this.props.ideaClick}
               goBack={this.props.goBack}
               likedIdea={this.props.likedIdea}
               updateIdeas={this.props.updateIdeas}
-              users={this.state.users}
+              users={this.props.users}
               companies={this.props.companies}
-              currentUser={this.state.currentUser}
+              currentUser={this.props.currentUser}
               newCompany={this.props.newCompany}
-              open={this.state.open}
-              onOpenModal={this.onOpenModal}
-              onCloseModal={this.onCloseModal}/>
+              open={this.props.open}
+              onOpenModal={this.props.onOpenModal}
+              onCloseModal={this.props.onCloseModal}/>
             :
           <div className="App">
             <UserPage
               clicked2={this.props.clicked2}
               deleteIdeaBack={this.props.deleteIdeaBack}
-              ideas={this.state.ideas}
+              ideas={this.props.ideas}
               foundIdea={this.props.foundIdea}
               addNewIdea={this.props.addNewIdea}
               deleteIdea={this.props.deleteIdea}
-              currentUser={this.state.currentUser}/>
+              currentUser={this.props.currentUser}/>
           </div>
         :
         <div>

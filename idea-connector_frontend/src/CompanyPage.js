@@ -5,12 +5,12 @@ import NewCarousel from './NewCarousel.js'
 import { Card, Button, Row, Col } from 'react-materialize'
 import SearchForm from './SearchForm'
 import EditCompanyForm from './EditCompanyForm'
-import ButtonExampleLabeled from './LikeButton'
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 import Carousal from './Carousal'
 import SearchedIdeas from './SearchedIdeas'
 import IdeaList from './IdeaList'
+import ButtonExampleLabeled from './LikeButton'
 
 class CompanyPage extends Component {
 
@@ -49,7 +49,6 @@ handleAboutClick = () => {
 
 
   render() {
-    console.log("ideaf", this.props.foundIdea)
     return (
       <div className="needs">
       {this.state.aboutClick ?
@@ -100,15 +99,15 @@ handleAboutClick = () => {
       </div>
     }
     <div className="pic" style={{backgroundImage: 'url("https://digitalready.co/sites/default/files/styles/1000x427/public/best-innovative-and-creative-facebook-ads-from-famous-brands.jpg?itok=UB_QOW2l")'}}>
-    {this.state.newCarouselClick ?
+    {this.props.newCarouselClick ?
     <NewCarousel
     clickedIdea={this.props.clickedIdea}
     foundIdea={this.props.foundIdea}
     clickedIdeaBack={this.props.clickedIdeaBack}
-    users={this.state.users}
-    handleClickedIdea={this.handleClickedIdea}/>
+    users={this.props.users}
+    handleClickedIdea={this.props.handleClickedIdea}/>
     :
-    <Modal open={this.state.open} center>
+    <Modal open={this.props.open} center>
     <div>
     {
       this.props.foundIdea.map(idea => {
@@ -119,7 +118,10 @@ handleAboutClick = () => {
           <p class="flow-text grey-text text-darken-2">{idea.description}</p>
           </div>
           <div>
-          <Button className="blue lighten-2" onClick={this.clickedIdeaBack}>GO BACK</Button>
+          <Button className="blue lighten-2" onClick={this.props.clickedIdeaBack}>GO BACK</Button>
+          <ButtonExampleLabeled
+          likedIdea={this.props.likedIdea}
+          updateIdeas={this.props.updateIdeas}/>
           </div>
           </div>
         )
