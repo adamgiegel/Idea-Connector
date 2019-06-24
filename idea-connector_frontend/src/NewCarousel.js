@@ -2,6 +2,7 @@ import { AutoRotatingCarousel } from 'material-auto-rotating-carousel';
 import { Slide } from 'material-auto-rotating-carousel'
 import React, { Component } from 'react';
 import './App.css';
+import Modal from 'react-responsive-modal';
 import 'materialize-css';
 import 'materialize-css/dist/css/materialize.min.css';
 import { Card, Row, Col } from 'react-materialize'
@@ -19,6 +20,8 @@ class NewCarousel extends Component {
 
 render () {
   return (
+    <div>
+    {this.props.newCarouselClick ?
     <div style={{ position: 'relative', width: '100%', height: 700 }}>
       <div onClick={() => this.setState({ open: true })}>
       <h1 className="words">CLICK TO SEE MORE EXAMPLE ADS</h1>
@@ -47,6 +50,25 @@ render () {
               }
       </AutoRotatingCarousel>
     </div>
+    :
+    <Modal open={this.props.open1} onClose={this.props.onCloseModal} center>
+    <div>
+    {
+      this.props.foundIdea.map(idea => {
+        return (
+          <div>
+          <div>
+          <iframe height="500px" width="750px" src={idea.video}/>
+          <p class="flow-text grey-text text-darken-2">{idea.description}</p>
+          </div>
+          </div>
+        )
+      })
+    }
+    </div>
+    </Modal>
+  }
+</div>
     )
   }
 }

@@ -27,31 +27,15 @@ render() {
     <h1 className="ideaConnector">IDEA CONNECTOR</h1>
     </div>
     <div className="pic" style={{backgroundImage: 'url("https://digitalready.co/sites/default/files/styles/1000x427/public/best-innovative-and-creative-facebook-ads-from-famous-brands.jpg?itok=UB_QOW2l")'}}>
-          {this.props.newCarouselClick ?
           <NewCarousel
+          newCarouselClick={this.props.newCarouselClick}
+          foundIdea={this.props.foundIdea}
+          findIdea={this.props.findIdea}
+          open1={this.props.open1}
+          onOpenModal={this.props.onOpenModal}
+          onCloseModal={this.props.onCloseModal}
           users={this.props.users}
           handleClickedIdea={this.props.handleClickedIdea}/>
-          :
-          <Modal open={this.props.open} center>
-          <div>
-          {
-            this.props.foundIdea.map(idea => {
-              return (
-                <div>
-                <div>
-                <iframe height="500px" width="750px" src={idea.video}/>
-                <p class="flow-text grey-text text-darken-2">{idea.description}</p>
-                </div>
-                <div>
-                <Button className="blue lighten-2" onClick={this.props.clickedIdeaBack}>GO BACK</Button>
-                </div>
-                </div>
-              )
-            })
-          }
-          </div>
-          </Modal>
-        }
     </div>
     <div className="pic" style={{backgroundImage: 'url("https://images.fastcompany.net/image/upload/w_1280,f_auto,q_auto,fl_lossy/fc/3045058-poster-p-1-4-strategies-for-introducing-new-ideas-at-work.jpg")'}}>
     <h1 className="about">ABOUT</h1>

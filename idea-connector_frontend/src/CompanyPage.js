@@ -30,7 +30,7 @@ class CompanyPage extends Component {
 
   filterCategories = () => {
     return this.props.ideas.filter(idea => {
-      console.log(idea.category)
+      console.log("poop", idea.category)
       return idea.category.toLowerCase().includes(this.state.search.toLowerCase())
     })
   }
@@ -50,6 +50,13 @@ handleAboutClick = () => {
 
   render() {
     return (
+      <div>
+      <br></br>
+      <br></br>
+      <br></br>
+      <div class="App">
+      <h1>HI {this.props.currentUser.name}</h1>
+      </div>
       <div className="needs">
       {this.state.aboutClick ?
         <div className='companyInfoDiv'>
@@ -87,50 +94,19 @@ handleAboutClick = () => {
         ideaClick={this.props.ideaClick}
         goBack={this.props.goBack}
         findIdea={this.props.findIdea}
+        foundIdea={this.props.foundIdea}
         someLikes={this.props.likes}
         likedIdea={this.props.likedIdea}
         updateIdeas={this.props.updateIdeas}/> :
         <IdeaList
         otherIdeas={this.filterCategories()}
         ideas={this.props.ideas}
-        foundIdea={this.props.foundIdea}
+        findIdea={this.props.findIdea}
         />}
       </div>
       </div>
     }
-    <div className="pic" style={{backgroundImage: 'url("https://digitalready.co/sites/default/files/styles/1000x427/public/best-innovative-and-creative-facebook-ads-from-famous-brands.jpg?itok=UB_QOW2l")'}}>
-    {this.props.newCarouselClick ?
-    <NewCarousel
-    clickedIdea={this.props.clickedIdea}
-    foundIdea={this.props.foundIdea}
-    clickedIdeaBack={this.props.clickedIdeaBack}
-    users={this.props.users}
-    handleClickedIdea={this.props.handleClickedIdea}/>
-    :
-    <Modal open={this.props.open} center>
-    <div>
-    {
-      this.props.foundIdea.map(idea => {
-        return (
-          <div>
-          <div>
-          <iframe height="500px" width="750px" src={idea.video}/>
-          <p class="flow-text grey-text text-darken-2">{idea.description}</p>
-          </div>
-          <div>
-          <Button className="blue lighten-2" onClick={this.props.clickedIdeaBack}>GO BACK</Button>
-          <ButtonExampleLabeled
-          likedIdea={this.props.likedIdea}
-          updateIdeas={this.props.updateIdeas}/>
-          </div>
-          </div>
-        )
-      })
-    }
-    </div>
-    </Modal>
-  }
-    </div>
+      </div>
       </div>
     );
   }

@@ -30,6 +30,9 @@ handleClick = () => {
       <br></br>
       <br></br>
       <br></br>
+      <div class="App">
+      <h1>HI {this.props.currentUser.name}</h1>
+      </div>
           <div>
             <h1 className="yourIdeaConnection">YOUR IDEA CONNECTION</h1>
           </div>

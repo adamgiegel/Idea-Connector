@@ -26,6 +26,7 @@ class Login extends Component {
               handleChangeSearch={this.props.handleChangeSearch}
               search={this.props.search}
               foundIdea={this.props.foundIdea}
+              findIdea={this.props.findIdea}
               newCarouselClick={this.props.newCarouselClick}
               ideaClick={this.props.ideaClick}
               goBack={this.props.goBack}

@@ -20,12 +20,12 @@ class App extends Component {
       loggedIn: false,
       currentUser: '',
       value: '',
-      ideaClick: '',
+      ideaClick: false,
       likedIdea: '',
       clickedIdea: true,
       clicked2: true,
       shadup: true,
-      open: true,
+      open1: true,
       newCarouselClick: true,
       showSignUp: false,
       name: '',
@@ -120,12 +120,10 @@ class App extends Component {
     if(res.error){
       alert(res.error)
     } else {
-      console.log(this.state.loggedIn)
       this.setState({
         currentUser: res,
         loggedIn: true,
       })
-      console.log(this.state.loggedIn)
     }
    })
   } else if (this.state.value === 'company') {
@@ -192,6 +190,8 @@ class App extends Component {
   handleLogout = () => {//sets the state of currentUser back to an empty string and loggedIn back to false
     this.setState({
       currentUser: '',
+      username: '',
+      password: '',
       loggedIn: false
     })
   }
@@ -209,11 +209,14 @@ class App extends Component {
 
 
   onOpenModal = () => {
-    this.setState({ open: true });
+    this.setState({ open1: true });
   };
 
   onCloseModal = () => {
-    this.setState({ open: false });
+    this.setState({
+      open1: false,
+      newCarouselClick: !this.state.newCarouselClick
+    });
   };
 
 
@@ -262,9 +265,10 @@ fetch(`http://localhost:3000/api/v1/likes`, {
 })
 .then(res => res.json())
 .then(like => {
+  console.log("like", like)
   this.setState({
     likedIdea: like
-  })
+  }, console.log("afterLike", this.state.likedIdea))
 })
 }
 
@@ -315,7 +319,7 @@ fetch(`http://localhost:3000/api/v1/likes`, {
   }
 
 
-  foundIdea = (id) => {//finds the selected idea when clicked on by the company in the list of ideas
+  findIdea = (id) => {//finds the selected idea when clicked on by the company in the list of ideas
     const foundIdea = this.state.users.map(user => {
       return user.ideas.find(idea => {
         return idea.id === id
@@ -363,7 +367,7 @@ fetch(`http://localhost:3000/api/v1/likes`, {
               loginPage={this.state.loginPage}
               newCarouselClick={this.state.newCarouselClick}
               handleClickedIdea={this.handleClickedIdea}
-              open={this.state.open}
+              open1={this.state.open1}
               onOpenModal={this.onOpenModal}
               onCloseModal={this.onCloseModal}
               foundIdea={this.state.foundIdea}
@@ -391,8 +395,9 @@ fetch(`http://localhost:3000/api/v1/likes`, {
               handleChangeSearch={this.handleChangeSearch}
               search={this.state.search}
               foundIdea={this.state.foundIdea}
+              findIdea={this.findIdea}
               newCarouselClick={this.state.newCarouselClick}
-              ideaClick={this.ideaClick}
+              ideaClick={this.state.ideaClick}
               goBack={this.goBack}
               likedIdea={this.state.likedIdea}
               updateIdeas={this.updateIdeas}
@@ -411,9 +416,6 @@ fetch(`http://localhost:3000/api/v1/likes`, {
               />
           <nav class="nav-wrapper">
             <div>
-            <SocialIcon url="https://www.linkedin.com/in/adam-giegel-ba5579a6/" style={{ height: 40, width: 40 }} bgColor="white" target="_blank"/>{' '}
-            <SocialIcon url="https://medium.com/@adamgiegel" style={{ height: 40, width: 40 }} network="medium" bgColor="white" target="_blank"/>{'  '}
-            <SocialIcon url="https://github.com/adamgiegel" style={{ height: 40, width: 40 }} network="github" bgColor="white" target="_blank"/>{'  '}
               <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <ul>
                   <li>
@@ -422,12 +424,15 @@ fetch(`http://localhost:3000/api/v1/likes`, {
                   <li>
                     <Link class="intro" to="/about">ABOUT</Link>
                   </li>
+                  {!this.state.loggedIn ?
                   <li>
                     <Link class="intro" to="/login">LOGIN</Link>
                   </li>
+                  :
                   <li>
-                    <Link class="intro" to="/contact">CONTACT ME</Link>
+                    <Link onClick={this.handleLogout} class="intro" to="/">LOGOUT</Link>
                   </li>
+                }
                 </ul>
               </ul>
             </div>

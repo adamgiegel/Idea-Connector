@@ -68,8 +68,9 @@ makeOffer = () => {
 
 
   render() {
+    console.log("findIdea", this.props.foundIdea)
     return (
-      this.props.findIdea.map(idea => {
+      this.props.foundIdea.map(idea => {
         return (
           <div>
             <Card>
