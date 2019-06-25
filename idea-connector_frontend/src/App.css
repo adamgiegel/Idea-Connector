@@ -3,7 +3,7 @@
 @import url('https://fonts.googleapis.com/css?family=Courgette');
 @import url('https://fonts.googleapis.com/css?family=Arapey');
 @import url('https://fonts.googleapis.com/css?family=Monoton');
-
+@import url('https://fonts.googleapis.com/css?family=Vollkorn+SC');
 
 .App {
   text-align: center;
@@ -340,4 +340,8 @@
 .login {
   left: 50%;
   top: 50%;
+}
+
+#carouselIdea {
+  font-family: "Vollkorn SC"
 }

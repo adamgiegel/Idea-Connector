@@ -3,14 +3,15 @@ import { Slide } from 'material-auto-rotating-carousel'
 import React, { Component } from 'react';
 import './App.css';
 import Modal from 'react-responsive-modal';
+import Collapsible from 'react-collapsible';
 import 'materialize-css';
 import 'materialize-css/dist/css/materialize.min.css';
-import { Card, Row, Col } from 'react-materialize'
+import { Card, Row, Col, Button } from 'react-materialize'
 
 
 
 const { red, blue, green, grey } = require('@material-ui/core/colors');
-const Button = require('@material-ui/core/Button').default;
+// const Button = require('@material-ui/core/Button').default;
 
 class NewCarousel extends Component {
 
@@ -59,7 +60,11 @@ render () {
           <div>
           <div>
           <iframe height="500px" width="750px" src={idea.video}/>
-          <p class="flow-text grey-text text-darken-2">{idea.description}</p>
+          <Collapsible class="App" trigger=<a class="waves-effect waves-light btn">CLICK FOR DESCRIPTION</a>>
+          <Card>
+            <p id="carouselIdea" class="flow-text grey-text text-darken-2">{idea.description}</p>
+          </Card>
+          </Collapsible>
           </div>
           </div>
         )
