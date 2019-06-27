@@ -215,6 +215,12 @@
   color: white;
 }
 
+.yourIdeaConnection1{
+  font-size: 4em;
+  font-family: 'Arapey';
+  color: black;
+}
+
 .words{
   font-size: 3em;
   top: 10%;
@@ -322,6 +328,12 @@
  height: 500px;
 }
 
+.pic1 {
+ background-size: cover;
+ background-repeat: no-repeat;
+ height: 200px;
+}
+
 .nav-wrapper {
   background-color: black;
   position: fixed;
@@ -344,4 +356,10 @@
 
 #carouselIdea {
   font-family: "Vollkorn SC"
+}
+
+#carouselIdea1 {
+  font-family: "Vollkorn SC";
+  font-size: 5em;
+  color: white;
 }

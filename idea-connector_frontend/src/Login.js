@@ -36,7 +36,7 @@ class Login extends Component {
               companies={this.props.companies}
               currentUser={this.props.currentUser}
               newCompany={this.props.newCompany}
-              open={this.props.open}
+              open1={this.props.open1}
               onOpenModal={this.props.onOpenModal}
               onCloseModal={this.props.onCloseModal}/>
             :

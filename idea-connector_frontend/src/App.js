@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import Login from './Login.js'
 import HomePage from './HomePage.js'
+import About from './About.js'
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
 import { SocialIcon } from 'react-social-icons';
 
@@ -405,7 +406,7 @@ fetch(`http://localhost:3000/api/v1/likes`, {
               companies={this.state.companies}
               currentUser={this.state.currentUser}
               newCompany={this.newCompany}
-              open={this.state.open}
+              open1={this.state.open1}
               onOpenModal={this.onOpenModal}
               onCloseModal={this.onCloseModal}
               clicked2={this.state.clicked2}
@@ -414,6 +415,7 @@ fetch(`http://localhost:3000/api/v1/likes`, {
               deleteIdea={this.deleteIdea}
               />)}
               />
+              <Route path="/about" render={(routeProps) => (<About {...routeProps}/>)}/>
           <nav class="nav-wrapper">
             <div>
               <ul id="nav-mobile" class="right hide-on-med-and-down">

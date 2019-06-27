@@ -54,8 +54,25 @@ handleAboutClick = () => {
       <br></br>
       <br></br>
       <br></br>
-      <div class="App">
-      <h1>HI {this.props.currentUser.name}</h1>
+      <div className="pic1" style={{backgroundImage: 'url("https://s3.amazonaws.com/noupe/2009/10/pattern-34.jpg")'}}>
+      <br></br>
+      <br></br>
+      <br></br>
+      <h1 id="carouselIdea1">Welcome back, {this.props.currentUser.contact} !</h1>
+      </div>
+      <div className="pic" style={{backgroundImage: 'url("https://digitalready.co/sites/default/files/styles/1000x427/public/best-innovative-and-creative-facebook-ads-from-famous-brands.jpg?itok=UB_QOW2l")'}}>
+            <br></br>
+            <br></br>
+            <br></br>
+            <NewCarousel
+            newCarouselClick={this.props.newCarouselClick}
+            foundIdea={this.props.foundIdea}
+            findIdea={this.props.findIdea}
+            open1={this.props.open1}
+            onOpenModal={this.props.onOpenModal}
+            onCloseModal={this.props.onCloseModal}
+            users={this.props.users}
+            handleClickedIdea={this.props.handleClickedIdea}/>
       </div>
       <div className="needs">
       {this.state.aboutClick ?
