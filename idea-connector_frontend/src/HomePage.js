@@ -42,7 +42,6 @@ render() {
         <h3 className="aboutWords">HAVE YOU EVER HAD A GOOD IDEA AND WANTED TO PITCH IT TO A COMPANY BUT DIDNT KNOW HOW?</h3>
         <h3 className="aboutWords">OR ARE YOU A COMPANY THAT NEEDS AN IDEA BUT CAN'T COME UP WITH ONE?</h3>
         <h3 className="aboutWords">CONNECT ADVERTISERS WITH COMPANIES.  YOU SUBMIT AN IDEA AND IF A COMPANY LIKES IT THEY OFFER YOU SOME COLD HARD CASH</h3>
-        <h3 className="aboutWords">Annually, over $500 billion is spent on advertising globally.</h3>
         </div>
     </div>
     </div>

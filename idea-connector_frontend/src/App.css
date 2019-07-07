@@ -334,6 +334,12 @@
  height: 200px;
 }
 
+.pic2 {
+ background-size: cover;
+ background-repeat: no-repeat;
+ height: 825px;
+}
+
 .nav-wrapper {
   background-color: black;
   position: fixed;
@@ -362,4 +368,10 @@
   font-family: "Vollkorn SC";
   font-size: 5em;
   color: white;
+}
+
+.carouselIdea3 {
+  font-family: "Vollkorn SC";
+  font-size: 2em;
+  color: gray;
 }
