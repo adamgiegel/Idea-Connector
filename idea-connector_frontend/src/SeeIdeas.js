@@ -52,7 +52,7 @@ class SeeIdeas extends Component {
 {this.state.selected ?
 
   <div className="pic" style={{backgroundImage: 'url("https://digitalready.co/sites/default/files/styles/1000x427/public/best-innovative-and-creative-facebook-ads-from-famous-brands.jpg?itok=UB_QOW2l")'}}>
-  <h1 className="aboutWords" onClick={this.handleSelectedClick}>DO YOU WANT TO SEE YOUR IDEAS?</h1>
+  <h1 className="aboutWords" onClick={this.handleSelectedClick} style={{cursor:'pointer'}}>DO YOU WANT TO SEE YOUR IDEAS?</h1>
   </div>
   :
   <div>
