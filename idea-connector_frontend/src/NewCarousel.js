@@ -24,7 +24,7 @@ render () {
     <div>
     {this.props.newCarouselClick ?
     <div style={{ position: 'relative', width: '100%', height: 700 }}>
-      <div onClick={() => this.setState({ open: true })}>
+      <div onClick={() => this.setState({ open: true })} style={{cursor:'pointer'}}>
       <h1 className="words">CLICK TO SEE MORE EXAMPLE ADS</h1>
       </div>
       <AutoRotatingCarousel
@@ -37,7 +37,7 @@ render () {
                 this.props.users.map(user => {
                   return user.ideas.map(idea => {
                     return (
-                      <div onClick={() => this.props.handleClickedIdea(idea.id)} key={idea.id}>
+                      <div onClick={() => this.props.handleClickedIdea(idea.id)} style={{cursor:'pointer'}} key={idea.id}>
                       <Slide
                         media={<img height="400px" src={idea.image}/>}
                         mediaBackgroundStyle={{ backgroundColor: grey[900] }}

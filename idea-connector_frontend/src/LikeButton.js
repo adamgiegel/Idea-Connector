@@ -8,7 +8,7 @@ class ButtonExampleLabeled extends Component{
     console.log("id", this.props.id)
     return (
       <div>
-        <Button onClick={() => this.props.updateIdeas(this.props.id)} as='div' labelPosition='right'>
+        <Button onClick={() => this.props.updateIdeas(this.props.id)} style={{cursor:'pointer'}} as='div' labelPosition='right'>
           <Button icon>
             <Icon name='heart' />
             Like

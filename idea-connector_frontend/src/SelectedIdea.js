@@ -62,8 +62,8 @@ class SelectedIdea extends Component{
               </div>
             })}
             <div>
-             <button class="ui button" onClick={(e) => this.handleAccept(e)}>YES</button>
-             <button class="ui button" onClick={(e) => this.handleAccept(e)}>NO</button>
+             <button class="ui button" onClick={(e) => this.handleAccept(e)} style={{cursor:'pointer'}}>YES</button>
+             <button class="ui button" onClick={(e) => this.handleAccept(e)} style={{cursor:'pointer'}}>NO</button>
            </div>
          {this.rejectedOffer()}
             </div>

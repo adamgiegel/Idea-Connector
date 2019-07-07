@@ -21,7 +21,7 @@ class SeeMyIdeas extends Component{
         return (
           <div>
           <ul>
-          <li className="ideasList" onClick={() => this.props.handleClick(idea.id)}>{idea.title}</li>
+          <li className="ideasList" onClick={() => this.props.handleClick(idea.id)} style={{cursor:'pointer'}}>{idea.title}</li>
           </ul>
           </div>
         )

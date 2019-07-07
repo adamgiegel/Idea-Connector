@@ -29,7 +29,7 @@ class NewIdea extends Component{
       <div>
       {this.state.chosen ?
       <div className="pic" style={{backgroundImage: 'url("https://images.fastcompany.net/image/upload/w_1280,f_auto,q_auto,fl_lossy/fc/3045058-poster-p-1-4-strategies-for-introducing-new-ideas-at-work.jpg")'}}>
-      <h1 className="aboutWords" onClick={this.handleNewFormClick}>CLICK ME</h1>
+      <h1 className="aboutWords" onClick={this.handleNewFormClick} style={{cursor:'pointer'}}>CLICK ME</h1>
       </div>
       :
       <div className="form">

@@ -18,7 +18,7 @@ class CompanyPage extends Component {
               this.props.users.map(user => {//map over all the users
                 return user.ideas.map(idea => {//map over the ideas to get the individual idea
                   return (
-                    <div onClick={() => this.props.handleClickedIdea(idea.id)} key={idea.id}>//Pass the idea id back up to the event handler in the homepage when the div is clicked, changing the state of clickedIdea to false
+                    <div onClick={() => this.props.handleClickedIdea(idea.id)} style={{cursor:'pointer'}} key={idea.id}>//Pass the idea id back up to the event handler in the homepage when the div is clicked, changing the state of clickedIdea to false
                     <img height="400px" src={idea.image}/>
                     <p className="legend">{idea.description.substring(0, 100)}...</p>
                     </div>
@@ -42,7 +42,7 @@ class CompanyPage extends Component {
                       </Card>
                   </div>
                     <div>
-                      <Button className="gray" onClick={this.props.clickedIdeaBack}>GO BACK</Button>
+                      <Button className="gray" onClick={this.props.clickedIdeaBack} style={{cursor:'pointer'}}>GO BACK</Button>
                     </div>
                 </div>
                 )
