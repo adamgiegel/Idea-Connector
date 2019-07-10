@@ -53,7 +53,7 @@ class Login extends Component {
         :
         <div>
         {this.props.showSignUp === false ?
-          <div className="pic" style={{backgroundImage: 'url("https://digitalready.co/sites/default/files/styles/1000x427/public/best-innovative-and-creative-facebook-ads-from-famous-brands.jpg?itok=UB_QOW2l")'}}>
+          <div className="pic3" style={{backgroundImage: 'url("https://d3nuqriibqh3vw.cloudfront.net/styles/aotw_detail_ir/s3/images/tabaconomia2.jpg?itok=oi7YKCdm")'}}>
           <br></br>
           <br></br>
           <br></br>
@@ -87,11 +87,6 @@ class Login extends Component {
               </Card>
           </div>
           </div>
-          </div>
-          <br></br>
-          <br></br>
-          <br></br>
-          <div className="pic" style={{backgroundImage: 'url("https://images.fastcompany.net/image/upload/w_1280,f_auto,q_auto,fl_lossy/fc/3045058-poster-p-1-4-strategies-for-introducing-new-ideas-at-work.jpg")'}}>
           </div>
           </div>
           :

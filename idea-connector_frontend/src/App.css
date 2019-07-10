@@ -341,6 +341,12 @@
  height: 600px;
 }
 
+.pic3 {
+ background-size: cover;
+ background-repeat: no-repeat;
+ height: 800px;
+}
+
 .nav-wrapper {
   background-color: black;
   position: fixed;
