@@ -337,7 +337,7 @@
 .pic2 {
  background-size: cover;
  background-repeat: no-repeat;
- height: 825px;
+ height: 600px;
 }
 
 .nav-wrapper {
@@ -378,4 +378,24 @@
 .welcomeBanner {
   font-family: "Vollkorn SC";
   color: #46DFA7;
+}
+
+.aboutMoney {
+  color: #46DFA7;
+  font-family: "Vollkorn SC";
+  font-size: 3em;
+}
+
+.aboutMoneyDiv {
+  height: 500px;
+}
+.aboutIdeas {
+  background-color: #808000;
+  height: 500px;
+}
+
+.aboutIdeasFont {
+  color: white;
+  font-family: "Vollkorn SC";
+  font-size: 2em;
 }
