@@ -4,6 +4,7 @@
 @import url('https://fonts.googleapis.com/css?family=Arapey');
 @import url('https://fonts.googleapis.com/css?family=Monoton');
 @import url('https://fonts.googleapis.com/css?family=Vollkorn+SC');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
 .App {
   text-align: center;
@@ -381,17 +382,46 @@
 }
 
 .aboutMoney {
-  color: #46DFA7;
-  font-family: "Vollkorn SC";
+  color: black;
+  font-family: "Open Sans";
   font-size: 3em;
 }
 
-.aboutMoneyDiv {
-  height: 500px;
+.aboutMoneyP {
+  color: black;
+  font-family: "Open Sans";
+  font-size: 2em;
 }
+
+
+.aboutMoneyDiv {
+  background: #D3D3D3;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 600px;
+  resize: vertical;
+  overflow: auto;
+}
+.aboutMoneyDiv h1 {
+  margin: 0;
+  padding: 20px;
+}
+
 .aboutIdeas {
   background-color: #808000;
-  height: 500px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 600px;
+  resize: vertical;
+  overflow: auto;
+}
+.aboutIdeas h1 {
+  margin: 0;
+  padding: 20px;
 }
 
 .aboutIdeasFont {
