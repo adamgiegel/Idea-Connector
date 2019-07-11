@@ -179,10 +179,17 @@
 }
 
 .ideaConnector {
-  font-size: 10em;
+  font-size: 12em;
   font-family: 'Arapey';
   color: white;
+display: flex;
+flex-direction: column;
+justify-content: center;
+resize: vertical;
+overflow: auto;
 }
+
+
 
 .homeCarousel {
   color: brown;
@@ -205,7 +212,7 @@
 }
 
 .aboutWords{
-  font-size: 2em;
+  font-size: 7em;
   font-family: 'Arapey';
   color: white;
 }
@@ -326,7 +333,7 @@
 .pic {
  background-size: cover;
  background-repeat: no-repeat;
- height: 500px;
+ height: 550px;
 }
 
 .pic1 {
@@ -374,7 +381,7 @@
 #carouselIdea1 {
   font-family: "Vollkorn SC";
   font-size: 5em;
-  color: white;
+  color: black;
 }
 
 .carouselIdea3 {
@@ -426,6 +433,21 @@
   overflow: auto;
 }
 .aboutIdeas h1 {
+  margin: 0;
+  padding: 20px;
+}
+
+.uPageWelcome {
+  background-color: #D3D3D3;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 500px;
+  resize: vertical;
+  overflow: auto;
+}
+.uPageWelcome h1 {
   margin: 0;
   padding: 20px;
 }

@@ -11,8 +11,7 @@ class SeeMyIdeas extends Component{
 
   render(){
     return(
-      <Card className="App">
-      <div className="pic" style={{backgroundImage: 'url("https://digitalready.co/sites/default/files/styles/1000x427/public/best-innovative-and-creative-facebook-ads-from-famous-brands.jpg?itok=UB_QOW2l")'}}>
+      <div className="pic" style={{backgroundImage: 'url("https://authorcentrix.com/wp-content/uploads/2018/06/ideas.jpg")'}}>
     <div>
           <h1 className="yourIdeas">YOUR IDEAS</h1>
     {
@@ -35,7 +34,6 @@ class SeeMyIdeas extends Component{
   </div>
     </div>
 </div>
-      </Card>
     )
       }
 }

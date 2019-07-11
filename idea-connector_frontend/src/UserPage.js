@@ -27,10 +27,10 @@ handleClick = () => {
       <br></br>
       <br></br>
       <br></br>
-      <div className="pic1" style={{backgroundImage: 'url("https://s3.amazonaws.com/noupe/2009/10/pattern-34.jpg")'}}>
-      <br></br>
+      <div className="carouselIdea1">
       <br></br>
       <h1 id="carouselIdea1">Welcome back, {this.props.currentUser.name} !</h1>
+      <img src="https://media.giphy.com/media/Wj7lNjMNDxSmc/giphy.gif" alt="sss"/>
       </div>
         <div>
           <div>
