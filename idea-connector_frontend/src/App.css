@@ -217,6 +217,24 @@ overflow: auto;
   color: white;
 }
 
+.aboutWords1{
+  font-size: 2em;
+  font-family: 'Arapey';
+  color: white;
+}
+
+.aboutWords2{
+  font-size: 3em;
+  font-family: 'Arapey';
+  color: white;
+}
+
+.aboutWords3{
+  font-size: 1em;
+  font-family: 'Arapey';
+  color: black;
+}
+
 .yourIdeaConnection{
   font-size: 4em;
   font-family: 'Arapey';
@@ -451,6 +469,12 @@ overflow: auto;
   margin: 0;
   padding: 20px;
 }
+
+.uPageWelcome1 {
+  background-color: #D3D3D3;
+  height: 500px;
+}
+
 
 .aboutIdeasFont {
   color: white;

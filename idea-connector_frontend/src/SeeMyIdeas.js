@@ -13,20 +13,21 @@ class SeeMyIdeas extends Component{
     return(
       <div className="pic" style={{backgroundImage: 'url("https://authorcentrix.com/wp-content/uploads/2018/06/ideas.jpg")'}}>
     <div>
-          <h1 className="yourIdeas">YOUR IDEAS</h1>
+          <h1 className="aboutWords">YOUR IDEAS</h1>
     {
     this.props.ideas.map(idea => {
       if(idea.user.id === this.props.currentUser.id){
         return (
           <div>
           <ul>
-          <li className="ideasList" onClick={() => this.props.handleClick(idea.id)} style={{cursor:'pointer'}}>{idea.title}</li>
+          <li className="aboutWords2" onClick={() => this.props.handleClick(idea.id)} style={{cursor:'pointer'}}>{idea.title}</li>
           </ul>
           </div>
         )
       }
     })
   }
+  <br></br>
   <div>
   {!this.props.selected ?
   <button class='ui button inverted basic button' onClick={this.props.handleYourIdeaBack}>I'M DONE, THANKS</button> : null
