@@ -30,6 +30,7 @@ class SelectedIdea extends Component{
 
   render(){
     return(
+      <div>
       <div className="pic2" style={{backgroundImage: 'url("https://images.martechadvisor.com/images/uploads/content_images/audience_5bc8a329ac14f.jpg")'}}>
       <br></br>
       <iframe height="450px" width="750px" src={this.props.findIdea.video}/>
@@ -42,6 +43,34 @@ class SelectedIdea extends Component{
           {this.props.findIdea.num_likes}
         </Label>
       </Button>
+      </div>
+      <div>
+      {
+      this.props.ideas.map(idea => {
+        if(idea.id === this.props.findIdea.id){
+          if(idea.offers.length >= 1){
+          return (
+            <div>
+            {idea.offers.map(offer => {
+              return <div>
+              <p className="accepted">OFFER AMOUNT: ${offer.amount}</p>
+              <p className="acceptOffer">ACCEPT OFFER?</p>
+              </div>
+            })}
+            <div>
+             <button class="ui button" onClick={(e) => this.handleAccept(e)} style={{cursor:'pointer'}}>YES</button>
+             <button class="ui button" onClick={(e) => this.handleAccept(e)} style={{cursor:'pointer'}}>NO</button>
+           </div>
+         {this.rejectedOffer()}
+            </div>
+          )
+      }
+      }
+      })
+      }
+      </div>
+      <div>
+      </div>
       </div>
     )
       }
