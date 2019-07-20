@@ -78,6 +78,7 @@ class SelectedIdea extends Component{
       <Button class='ui button large' onClick={this.props.goBack}>GO BACK</Button>
       <Button class='ui button' onClick={() => this.props.deleteIdea(this.props.findIdea.id)}>DEAD IDEA</Button>
       <br></br>
+      <div>test</div>
       <br></br>
       </div>
     )
