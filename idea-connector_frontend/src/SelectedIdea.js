@@ -31,7 +31,7 @@ class SelectedIdea extends Component{
   render(){
     return(
       <div>
-      <div className="pic2" style={{backgroundImage: 'url("https://images.martechadvisor.com/images/uploads/content_images/audience_5bc8a329ac14f.jpg")'}}>
+      <div className="pic2">
       <br></br>
       <iframe height="450px" width="750px" src={this.props.findIdea.video}/>
       <Button as='div' labelPosition='right'>
@@ -70,7 +70,11 @@ class SelectedIdea extends Component{
       }
       </div>
       <div>
+      <br></br>
+      <p>{this.props.findIdea.description}</p>
       </div>
+      <button class='ui button blue basic button' onClick={this.props.goBack}>GO BACK</button>
+      <button class='ui button blue basic button' onClick={() => this.props.deleteIdea(this.props.findIdea.id)}>DEAD IDEA</button>
       </div>
     )
       }
