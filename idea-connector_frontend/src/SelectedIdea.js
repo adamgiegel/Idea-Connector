@@ -71,10 +71,14 @@ class SelectedIdea extends Component{
       </div>
       <div>
       <br></br>
-      <p>{this.props.findIdea.description}</p>
+      <Card>
+      <p className="aboutMoneyP">{this.props.findIdea.description}</p>
+      </Card>
       </div>
       <Button class='ui button large' onClick={this.props.goBack}>GO BACK</Button>
       <Button class='ui button' onClick={() => this.props.deleteIdea(this.props.findIdea.id)}>DEAD IDEA</Button>
+      <br></br>
+      <br></br>
       </div>
     )
       }
