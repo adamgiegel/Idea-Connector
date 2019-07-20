@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
 import 'semantic-ui-css/semantic.min.css';
-import { Icon, Label, Button } from 'semantic-ui-react'
+import { Icon, Label } from 'semantic-ui-react'
 import UserForm from './UserForm'
 import 'materialize-css';
 import 'materialize-css/dist/css/materialize.min.css';
-import { Card, Row, Col } from 'react-materialize'
+import { Card, Row, Col, Button } from 'react-materialize'
 
 class SelectedIdea extends Component{
 
@@ -33,16 +33,16 @@ class SelectedIdea extends Component{
       <div>
       <div className="pic2">
       <br></br>
+      <Card>
       <iframe height="450px" width="750px" src={this.props.findIdea.video}/>
       <Button as='div' labelPosition='right'>
-        <Button icon>
           <Icon name='heart' />
           Likes
-        </Button>
         <Label s='a' basic pointing='left'>
           {this.props.findIdea.num_likes}
         </Label>
       </Button>
+      </Card>
       </div>
       <div>
       {
@@ -53,13 +53,13 @@ class SelectedIdea extends Component{
             <div>
             {idea.offers.map(offer => {
               return <div>
-              <p className="accepted">OFFER AMOUNT: ${offer.amount}</p>
-              <p className="acceptOffer">ACCEPT OFFER?</p>
+              <p className="aboutIdeasFont4">OFFER AMOUNT: ${offer.amount}</p>
+              <p className="aboutMoneyP">ACCEPT OFFER?</p>
               </div>
             })}
             <div>
-             <button class="ui button" onClick={(e) => this.handleAccept(e)} style={{cursor:'pointer'}}>YES</button>
-             <button class="ui button" onClick={(e) => this.handleAccept(e)} style={{cursor:'pointer'}}>NO</button>
+             <Button class="ui button" onClick={(e) => this.handleAccept(e)} style={{cursor:'pointer'}}>YES</Button>
+             <Button class="ui button" onClick={(e) => this.handleAccept(e)} style={{cursor:'pointer'}}>NO</Button>
            </div>
          {this.rejectedOffer()}
             </div>
@@ -73,8 +73,8 @@ class SelectedIdea extends Component{
       <br></br>
       <p>{this.props.findIdea.description}</p>
       </div>
-      <button class='ui button blue basic button' onClick={this.props.goBack}>GO BACK</button>
-      <button class='ui button blue basic button' onClick={() => this.props.deleteIdea(this.props.findIdea.id)}>DEAD IDEA</button>
+      <Button class='ui button large' onClick={this.props.goBack}>GO BACK</Button>
+      <Button class='ui button' onClick={() => this.props.deleteIdea(this.props.findIdea.id)}>DEAD IDEA</Button>
       </div>
     )
       }
