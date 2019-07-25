@@ -3,6 +3,7 @@ import './App.css';
 import 'semantic-ui-css/semantic.min.css';
 import UserForm from './UserForm'
 import SeeIdeas from './SeeIdeas';
+import Modal from 'react-responsive-modal';
 import NewIdea from './NewIdea';
 import 'materialize-css';
 import 'materialize-css/dist/css/materialize.min.css';
@@ -45,6 +46,9 @@ handleClick = () => {
           </div>
           <div>
             <NewIdea
+                open1={this.props.open1}
+                onOpenModal={this.props.onOpenModal}
+                onCloseModal={this.props.onCloseModal}
                 currentUser={this.props.currentUser}
                 foundIdea={this.props.foundIdea}
                 addNewIdea={this.props.addNewIdea}

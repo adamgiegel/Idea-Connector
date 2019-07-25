@@ -42,6 +42,9 @@ class Login extends Component {
             :
           <div className="App">
             <UserPage
+              open1={this.props.open1}
+              onOpenModal={this.props.onOpenModal}
+              onCloseModal={this.props.onCloseModal}
               clicked2={this.props.clicked2}
               deleteIdeaBack={this.props.deleteIdeaBack}
               ideas={this.props.ideas}

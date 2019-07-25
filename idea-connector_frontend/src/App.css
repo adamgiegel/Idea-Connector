@@ -424,6 +424,18 @@ overflow: auto;
   font-size: 2em;
 }
 
+.aboutMoneyR {
+  color: red;
+  font-family: "Open Sans";
+  font-size: 2em;
+}
+
+.aboutMoneyA {
+  color: green;
+  font-family: "Open Sans";
+  font-size: 2em;
+}
+
 
 .aboutMoneyDiv {
   background: #D3D3D3;

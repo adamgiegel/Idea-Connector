@@ -16,9 +16,9 @@ class SelectedIdea extends Component{
 
   rejectedOffer = () => {
    if(this.state.accept === "NO"){
-     return <p className="status">STATUS: <p className="rejected">REJECTED.</p>CONTACT THE COMPANY TO NEGOTIATE</p>
+     return <p className="status">STATUS: <p className="aboutMoneyR">REJECTED.</p>CONTACT THE COMPANY TO NEGOTIATE</p>
    } else if (this.state.accept === "YES"){
-     return <p className="status">STATUS: <p className="accepted">ACCEPTED!</p>YOU WILL BE FAMOUS SOON!</p>
+     return <p className="status">STATUS: <p className="aboutMoneyA">ACCEPTED!</p>YOU WILL BE FAMOUS SOON!</p>
    }
  }
 
@@ -35,15 +35,12 @@ class SelectedIdea extends Component{
       <br></br>
       <Card>
       <iframe height="450px" width="750px" src={this.props.findIdea.video}/>
-      <Button as='div' labelPosition='right'>
-          <Icon name='heart' />
-          Likes
-        <Label s='a' basic pointing='left'>
-          {this.props.findIdea.num_likes}
-        </Label>
-      </Button>
       </Card>
       </div>
+      <Button className='btn-large'>
+          <Icon name='heart' />
+          {this.props.findIdea.num_likes}
+      </Button>
       <div>
       {
       this.props.ideas.map(idea => {

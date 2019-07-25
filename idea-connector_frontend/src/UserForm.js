@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import Modal from 'react-responsive-modal';
 import 'semantic-ui-css/semantic.min.css';
 
 class UserForm extends Component {
