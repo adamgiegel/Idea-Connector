@@ -436,6 +436,16 @@ overflow: auto;
   font-size: 2em;
 }
 
+.formLabels {
+  color: #003300;
+  font-family: "Open Sans";
+  font-size: 15px;
+}
+
+.inputHeight {
+  height: 300px;
+}
+
 
 .aboutMoneyDiv {
   background: #D3D3D3;

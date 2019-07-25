@@ -69,28 +69,29 @@ handleChangeForm = (e) => {
     <form onSubmit={(e) => this.handleSubmit(e)}>
       <div>
         <div class="field">
-          <label font="bold">Idea Name</label>
+          <label className="formLabels">Idea Name</label>
           <input onChange={this.handleChangeForm} type="text" name="title" placeholder="Idea Name" value={this.state.title}/>
         </div>
         <div class="field">
-          <label>Video Link</label>
+          <label className="formLabels">Video Link</label>
           <input onChange={this.handleChangeForm} type="text" name="video" placeholder="Video Link" value={this.state.video}/>
         </div>
         <div class="field">
-          <label>Song Link</label>
+          <label className="formLabels">Song Link</label>
           <input onChange={this.handleChangeForm} type="text" name="song" placeholder="Song Link" value={this.state.song}/>
         </div>
         <div class="field">
-          <label>Image Link</label>
+          <label className="formLabels">Image Link</label>
           <input onChange={this.handleChangeForm} type="text" name="image" placeholder="Image Link" value={this.state.image}/>
         </div>
         <div class="field">
-            <label>Description</label>
-            <textarea onChange={this.handleChangeForm} type="text" name="description" value={this.state.description}></textarea>
+            <label className="formLabels">Category</label>
+            <input onChange={this.handleChangeForm} type="text" name="category" placeholder="Category" value={this.state.category}></input>
         </div>
+        <br></br>
         <div class="field">
-            <label>Category</label>
-            <textarea onChange={this.handleChangeForm} type="text" name="category" value={this.state.category}></textarea>
+            <label className="formLabels">Description</label>
+            <textarea className="inputHeight" onChange={this.handleChangeForm} type="text" name="description" value={this.state.description}></textarea>
         </div>
           <button class="ui button" type="submit">Submit</button>
           <button onClick={this.props.handleFormBack} class='ui button'>Changed My Mind</button>
