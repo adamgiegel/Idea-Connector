@@ -30,7 +30,7 @@ class SelectedIdea extends Component{
 
   render(){
     return(
-      <div>
+      <div className="ideasGray">
       <div className="pic2">
       <br></br>
       <Card>

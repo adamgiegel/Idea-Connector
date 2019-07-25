@@ -487,3 +487,7 @@ overflow: auto;
   font-family: "Open Sans";
   font-size: 3em;
 }
+
+.ideasGray {
+  background-color: #F0F0F0;
+}
