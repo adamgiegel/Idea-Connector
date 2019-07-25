@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
 import Modal from 'react-responsive-modal';
-import 'semantic-ui-css/semantic.min.css';
+import 'materialize-css';
+import 'materialize-css/dist/css/materialize.min.css';
+import { Card, Button, Row, Col } from 'react-materialize'
 
 class UserForm extends Component {
 
@@ -65,9 +67,9 @@ handleChangeForm = (e) => {
   render() {
     return (
     <form onSubmit={(e) => this.handleSubmit(e)}>
-      <div className="ui form">
+      <div>
         <div class="field">
-          <label>Idea Name</label>
+          <label font="bold">Idea Name</label>
           <input onChange={this.handleChangeForm} type="text" name="title" placeholder="Idea Name" value={this.state.title}/>
         </div>
         <div class="field">
@@ -90,12 +92,6 @@ handleChangeForm = (e) => {
             <label>Category</label>
             <textarea onChange={this.handleChangeForm} type="text" name="category" value={this.state.category}></textarea>
         </div>
-        <div class="field">
-        <div class="ui checkbox">
-          <input type="checkbox" tabindex="0" class="hidden"/>
-          <label>I agree to the Terms and Conditions</label>
-        </div>
-      </div>
           <button class="ui button" type="submit">Submit</button>
           <button onClick={this.props.handleFormBack} class='ui button'>Changed My Mind</button>
   </div>

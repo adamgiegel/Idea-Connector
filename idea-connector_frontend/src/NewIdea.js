@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
-import 'semantic-ui-css/semantic.min.css';
-import { Card, Icon } from 'semantic-ui-react'
-import 'semantic-ui-css/semantic.min.css';
+import 'materialize-css';
+import 'materialize-css/dist/css/materialize.min.css';
+import { Card, Button, Row, Col } from 'react-materialize'
+import Modal from 'react-responsive-modal';
 import UserForm from './UserForm'
 
 class NewIdea extends Component{
@@ -32,10 +33,12 @@ class NewIdea extends Component{
       </div>
       :
       <div className="form">
+      <Card>
       <UserForm
       currentUser={this.props.currentUser}
       handleFormBack={this.handleFormBack}
       addNewIdea={this.props.addNewIdea}/>
+      </Card>
       </div>
       }
       </div>
