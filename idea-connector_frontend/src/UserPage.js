@@ -56,6 +56,13 @@ handleClick = () => {
             </div>
             <div className="pic" style={{backgroundImage: 'url("https://images.fastcompany.net/image/upload/w_1280,f_auto,q_auto,fl_lossy/fc/3045058-poster-p-1-4-strategies-for-introducing-new-ideas-at-work.jpg")'}}>
             <h1 className="aboutWords">HERE ARE SOME COMPANIES THAT LIKE YOUR WORK</h1>
+            {
+              this.props.users.map(idea => {
+                return idea.ideas.map(likes => {
+                  return <div>{likes.likers[0]}</div>
+                })
+              })
+            }
             </div>
         </div>
       </div>

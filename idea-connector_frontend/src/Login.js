@@ -51,6 +51,7 @@ class Login extends Component {
               foundIdea={this.props.foundIdea}
               addNewIdea={this.props.addNewIdea}
               deleteIdea={this.props.deleteIdea}
+              users={this.props.users}
               currentUser={this.props.currentUser}/>
           </div>
         :
