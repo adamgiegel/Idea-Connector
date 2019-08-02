@@ -74,11 +74,11 @@ handleAboutClick = () => {
             users={this.props.users}
             handleClickedIdea={this.props.handleClickedIdea}/>
       </div>
-      <div className="needs">
+      <div className="aboutMoneyDiv">
       {this.state.aboutClick ?
         <div className='companyInfoDiv'>
-          <p className="companyInfo">{this.props.currentUser.name}</p>
-          <p className="companyInfo1">{this.props.currentUser.about}</p>
+          <p className="aboutMoney">{this.props.currentUser.name}</p>
+          <p className="aboutMoneyP">{this.props.currentUser.about}</p>
           <button class='ui button' onClick={this.handleAboutClick}>EDIT YOUR INFO</button>
           </div>
       :
