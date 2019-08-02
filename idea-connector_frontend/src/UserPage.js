@@ -60,7 +60,7 @@ handleClick = () => {
               this.props.users.map(idea => {
                 return idea.ideas.map(likes => {
                     if(likes.likers.length > 1){
-                      console.log(likes.likers)
+                      console.log(likes.likers.name)
                     }
                 })
               })
