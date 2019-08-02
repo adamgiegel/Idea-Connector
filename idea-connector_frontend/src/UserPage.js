@@ -60,7 +60,11 @@ handleClick = () => {
               this.props.users.map(idea => {
                 return idea.ideas.map(likes => {
                     if(likes.likers.length > 1){
-                      console.log(likes.likers.name)
+                      let newArr = []
+                      return likes.likers.map(id => {
+                        newArr.push(id.name)
+                      })
+                      console.log(newArr)
                     }
                 })
               })
