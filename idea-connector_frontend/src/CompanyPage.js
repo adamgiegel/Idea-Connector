@@ -54,7 +54,7 @@ handleAboutClick = () => {
       <br></br>
       <br></br>
       <br></br>
-      <div className="pic1" style={{backgroundImage: 'url("https://s3.amazonaws.com/noupe/2009/10/pattern-34.jpg")'}}>
+      <div className="pic2" style={{backgroundImage: 'url("https://media.giphy.com/media/26xBwdIuRJiAIqHwA/giphy.gif")'}}>
       <br></br>
       <br></br>
       <br></br>
