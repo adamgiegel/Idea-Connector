@@ -59,7 +59,9 @@ handleClick = () => {
             {
               this.props.users.map(idea => {
                 return idea.ideas.map(likes => {
-                  return <div>{likes.likers[0]}</div>
+                    if(likes.likers.length > 1){
+                      console.log(likes.likers)
+                    }
                 })
               })
             }
