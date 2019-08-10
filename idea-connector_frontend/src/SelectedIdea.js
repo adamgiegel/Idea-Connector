@@ -69,7 +69,7 @@ class SelectedIdea extends Component{
       <div>
       <br></br>
       <Card>
-      <p className="aboutMoneyP">{this.props.findIdea.description}</p>
+      <p className="coke">{this.props.findIdea.description}</p>
       </Card>
       </div>
       <Button class='ui button large' onClick={this.props.goBack}>GO BACK</Button>
