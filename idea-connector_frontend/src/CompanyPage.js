@@ -77,8 +77,8 @@ handleAboutClick = () => {
       <div>
       {this.state.aboutClick ?
         <div className="aboutMoneyDiv">
-          <p className="aboutMoney">{this.props.currentUser.name}</p>
-          <p className="aboutMoneyP">{this.props.currentUser.about}</p>
+          <p className="coke">{this.props.currentUser.name}</p>
+          <p className="coke1">{this.props.currentUser.about}</p>
           <button class='ui button' onClick={this.handleAboutClick}>EDIT YOUR INFO</button>
           </div>
       :

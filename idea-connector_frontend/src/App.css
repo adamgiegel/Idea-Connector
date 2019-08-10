@@ -5,6 +5,7 @@
 @import url('https://fonts.googleapis.com/css?family=Monoton');
 @import url('https://fonts.googleapis.com/css?family=Vollkorn+SC');
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Lexend+Exa');
 
 .App {
   text-align: center;
@@ -512,4 +513,16 @@ overflow: auto;
 
 .ideasGray {
   background-color: #F0F0F0;
+}
+
+.coke {
+  color: white;
+  font-family: "Lexend Exa";
+  font-size: 5em;
+}
+
+.coke1 {
+  color: white;
+  font-family: "Lexend Exa";
+  font-size: 2em;
 }
