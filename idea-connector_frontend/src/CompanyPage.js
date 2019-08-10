@@ -91,7 +91,7 @@ handleAboutClick = () => {
     }
     {this.state.needIdeaClick ?
       <div className="pic" onClick={this.handleNeedIdea} style={{backgroundImage: 'url("http://cdn.acodez.in/wp-content/uploads/2017/10/Digital-advertising-India-Infographic.jpg")'}}>
-        <h1>CLICK TO SEE MORE ADS</h1>
+        <h1 className="coke">CLICK TO SEE MORE ADS</h1>
       </div>
       :
       <div className="searchedIdeas">

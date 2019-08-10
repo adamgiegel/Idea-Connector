@@ -516,13 +516,19 @@ overflow: auto;
 }
 
 .coke {
-  color: white;
+  color: black;
   font-family: "Lexend Exa";
   font-size: 5em;
 }
 
 .coke1 {
-  color: white;
+  color: black;
   font-family: "Lexend Exa";
   font-size: 2em;
+}
+
+.coke2 {
+  color: black;
+  font-family: "Lexend Exa";
+  font-size: 3em;
 }
