@@ -74,9 +74,9 @@ handleAboutClick = () => {
             users={this.props.users}
             handleClickedIdea={this.props.handleClickedIdea}/>
       </div>
-      <div className="aboutMoneyDiv">
+      <div>
       {this.state.aboutClick ?
-        <div className='companyInfoDiv'>
+        <div className="aboutMoneyDiv">
           <p className="aboutMoney">{this.props.currentUser.name}</p>
           <p className="aboutMoneyP">{this.props.currentUser.about}</p>
           <button class='ui button' onClick={this.handleAboutClick}>EDIT YOUR INFO</button>
@@ -90,7 +90,8 @@ handleAboutClick = () => {
       </div>
     }
     {this.state.needIdeaClick ?
-      <div className="pic" onClick={this.handleNeedIdea} style={{backgroundImage: 'url("https://digitalready.co/sites/default/files/styles/1000x427/public/best-innovative-and-creative-facebook-ads-from-famous-brands.jpg?itok=UB_QOW2l")'}}>
+      <div className="pic" onClick={this.handleNeedIdea} style={{backgroundImage: 'url("http://cdn.acodez.in/wp-content/uploads/2017/10/Digital-advertising-India-Infographic.jpg")'}}>
+        <h1>CLICK TO SEE MORE ADS</h1>
       </div>
       :
       <div className="searchedIdeas">
